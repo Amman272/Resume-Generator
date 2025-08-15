@@ -1,13 +1,8 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-interface ContactFormProps {
-  data: any;
-  updateData: (section: string, data: any) => void;
-}
-
-const ContactForm = ({ data, updateData }: ContactFormProps) => {
-  const handleChange = (field: string, value: string) => {
+const ContactForm = ({ data, updateData }) => {
+  const handleChange = (field, value) => {
     updateData('contact', { [field]: value });
   };
 
