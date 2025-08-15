@@ -1,388 +1,582 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Eye, RotateCcw, Download, FileText, Mail, GraduationCap, Briefcase, FolderOpen, Code, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { FileText, Plus, Trash2, Download, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
-
-interface Experience {
-  id: string;
-  company: string;
-  position: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-}
-
-interface Education {
-  id: string;
-  institution: string;
-  degree: string;
-  graduationDate: string;
-  gpa?: string;
-}
+import { Textarea } from '@/components/ui/textarea';
 
 const ResumeBuilder = () => {
-  const [personalInfo, setPersonalInfo] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    location: '',
-    website: '',
-    linkedin: ''
+  const [formData, setFormData] = useState({
+    // Contact (5 fields)
+    NAME: '',
+    PHONE: '',
+    EMAIL: '',
+    LINKEDIN: '',
+    GITHUB: '',
+    
+    // Education (4 fields)
+    schoolName: '',
+    dates: '',
+    degree: '',
+    educationLocation: '',
+    
+    // Experience (8 fields)
+    companyName: '',
+    experienceLocation: '',
+    role: '',
+    startDate: '',
+    endDate: '',
+    experiencePoint1: '',
+    experiencePoint2: '',
+    experiencePoint3: '',
+    
+    // Projects (6 fields)
+    projectName: '',
+    technologies: '',
+    projectDate: '',
+    projectPoint1: '',
+    projectPoint2: '',
+    projectPoint3: '',
+    
+    // Technical Skills (3 fields)
+    languages: '',
+    developerTools: '',
+    technologiesFrameworks: '',
+    
+    // Achievements (8 fields)
+    organizationName: '',
+    achievementStartDate: '',
+    achievementEndDate: '',
+    achievementRole: '',
+    achievementLocation: '',
+    achievementPoint1: '',
+    achievementPoint2: '',
+    achievementPoint3: ''
   });
 
-  const [experiences, setExperiences] = useState<Experience[]>([
-    { id: '1', company: '', position: '', startDate: '', endDate: '', description: '' }
-  ]);
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
-  const [education, setEducation] = useState<Education[]>([
-    { id: '1', institution: '', degree: '', graduationDate: '', gpa: '' }
-  ]);
-
-  const [skills, setSkills] = useState('');
-  const [summary, setSummary] = useState('');
-
-  const addExperience = () => {
-    const newExp: Experience = {
-      id: Date.now().toString(),
-      company: '',
-      position: '',
+  const resetForm = () => {
+    setFormData({
+      NAME: '',
+      PHONE: '',
+      EMAIL: '',
+      LINKEDIN: '',
+      GITHUB: '',
+      schoolName: '',
+      dates: '',
+      degree: '',
+      educationLocation: '',
+      companyName: '',
+      experienceLocation: '',
+      role: '',
       startDate: '',
       endDate: '',
-      description: ''
-    };
-    setExperiences([...experiences, newExp]);
-  };
-
-  const removeExperience = (id: string) => {
-    setExperiences(experiences.filter(exp => exp.id !== id));
-  };
-
-  const updateExperience = (id: string, field: keyof Experience, value: string) => {
-    setExperiences(experiences.map(exp => 
-      exp.id === id ? { ...exp, [field]: value } : exp
-    ));
-  };
-
-  const addEducation = () => {
-    const newEdu: Education = {
-      id: Date.now().toString(),
-      institution: '',
-      degree: '',
-      graduationDate: '',
-      gpa: ''
-    };
-    setEducation([...education, newEdu]);
-  };
-
-  const removeEducation = (id: string) => {
-    setEducation(education.filter(edu => edu.id !== id));
-  };
-
-  const updateEducation = (id: string, field: keyof Education, value: string) => {
-    setEducation(education.map(edu => 
-      edu.id === id ? { ...edu, [field]: value } : edu
-    ));
+      experiencePoint1: '',
+      experiencePoint2: '',
+      experiencePoint3: '',
+      projectName: '',
+      technologies: '',
+      projectDate: '',
+      projectPoint1: '',
+      projectPoint2: '',
+      projectPoint3: '',
+      languages: '',
+      developerTools: '',
+      technologiesFrameworks: '',
+      organizationName: '',
+      achievementStartDate: '',
+      achievementEndDate: '',
+      achievementRole: '',
+      achievementLocation: '',
+      achievementPoint1: '',
+      achievementPoint2: '',
+      achievementPoint3: ''
+    });
   };
 
   const generateResume = () => {
-    // TODO: Implement resume generation
-    console.log('Generating resume...', { personalInfo, experiences, education, skills, summary });
+    console.log('Generating resume with data:', formData);
+    alert('Resume generation will be implemented with backend integration!');
   };
 
   return (
     <div className="min-h-screen gradient-bg">
       {/* Header */}
-      <header className="backdrop-blur-md bg-card/80 shadow-lg border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Link to="/" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
+      <header className="bg-card/90 backdrop-blur-md shadow-card border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <Link to="/" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-secondary">
                 <ArrowLeft className="h-5 w-5" />
-                <span>Back to Home</span>
+                <span className="font-medium">Back</span>
               </Link>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl shadow-lg">
-                <FileText className="h-7 w-7 text-primary-foreground" />
+              <div className="flex items-center space-x-2">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-xl">
+                  <FileText className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h1 className="text-xl font-bold gradient-text">Resume Builder</h1>
               </div>
-              <h1 className="text-3xl font-bold gradient-text">Resume Builder</h1>
             </div>
-            <Button onClick={generateResume} className="btn-primary">
-              <Download className="h-5 w-5 mr-2" />
-              Generate PDF
-            </Button>
+            
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" onClick={resetForm} className="flex items-center space-x-2">
+                <RotateCcw className="h-4 w-4" />
+                <span>Reset</span>
+              </Button>
+              <Button variant="outline" className="flex items-center space-x-2">
+                <Eye className="h-4 w-4" />
+                <span>Preview</span>
+              </Button>
+              <Button onClick={generateResume} className="flex items-center space-x-2">
+                <Download className="h-4 w-4" />
+                <span>Generate PDF</span>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="space-y-8">
-          {/* Personal Information */}
-          <Card className="p-8 border-border/50">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center">
-              <div className="w-2 h-6 bg-gradient-to-b from-primary to-accent rounded-full mr-3"></div>
-              Personal Information
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-foreground font-medium">Full Name</Label>
-                <Input
-                  id="name"
-                  value={personalInfo.name}
-                  onChange={(e) => setPersonalInfo({...personalInfo, name: e.target.value})}
-                  placeholder="John Doe"
-                  className="border-border/50 focus:border-primary"
-                />
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Form Section */}
+          <div className="space-y-6">
+            {/* Contact Information */}
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                  <Mail className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Contact Information</h2>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground font-medium">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={personalInfo.email}
-                  onChange={(e) => setPersonalInfo({...personalInfo, email: e.target.value})}
-                  placeholder="john.doe@email.com"
-                  className="border-border/50 focus:border-primary"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-foreground font-medium">Phone Number</Label>
-                <Input
-                  id="phone"
-                  value={personalInfo.phone}
-                  onChange={(e) => setPersonalInfo({...personalInfo, phone: e.target.value})}
-                  placeholder="+1 (555) 123-4567"
-                  className="border-border/50 focus:border-primary"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="location" className="text-foreground font-medium">Location</Label>
-                <Input
-                  id="location"
-                  value={personalInfo.location}
-                  onChange={(e) => setPersonalInfo({...personalInfo, location: e.target.value})}
-                  placeholder="San Francisco, CA"
-                  className="border-border/50 focus:border-primary"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="website" className="text-foreground font-medium">Website</Label>
-                <Input
-                  id="website"
-                  value={personalInfo.website}
-                  onChange={(e) => setPersonalInfo({...personalInfo, website: e.target.value})}
-                  placeholder="https://johndoe.com"
-                  className="border-border/50 focus:border-primary"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="linkedin" className="text-foreground font-medium">LinkedIn</Label>
-                <Input
-                  id="linkedin"
-                  value={personalInfo.linkedin}
-                  onChange={(e) => setPersonalInfo({...personalInfo, linkedin: e.target.value})}
-                  placeholder="linkedin.com/in/johndoe"
-                  className="border-border/50 focus:border-primary"
-                />
-              </div>
-            </div>
-          </Card>
-
-          {/* Professional Summary */}
-          <Card className="p-8 border-border/50">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center">
-              <div className="w-2 h-6 bg-gradient-to-b from-primary to-accent rounded-full mr-3"></div>
-              Professional Summary
-            </h2>
-            <div className="space-y-2">
-              <Label htmlFor="summary" className="text-foreground font-medium">Summary</Label>
-              <Textarea
-                id="summary"
-                value={summary}
-                onChange={(e) => setSummary(e.target.value)}
-                placeholder="Write a compelling professional summary that highlights your key achievements and expertise..."
-                className="min-h-[120px] border-border/50 focus:border-primary resize-none"
-              />
-            </div>
-          </Card>
-
-          {/* Work Experience */}
-          <Card className="p-8 border-border/50">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-foreground flex items-center">
-                <div className="w-2 h-6 bg-gradient-to-b from-primary to-accent rounded-full mr-3"></div>
-                Work Experience
-              </h2>
-              <Button onClick={addExperience} variant="outline" size="sm" className="border-primary/20 hover:bg-primary/10">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Experience
-              </Button>
-            </div>
-            <div className="space-y-6">
-              {experiences.map((exp, index) => (
-                <div key={exp.id} className="relative">
-                  {index > 0 && <Separator className="mb-6" />}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">Company</Label>
-                      <Input
-                        value={exp.company}
-                        onChange={(e) => updateExperience(exp.id, 'company', e.target.value)}
-                        placeholder="Company Name"
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">Position</Label>
-                      <Input
-                        value={exp.position}
-                        onChange={(e) => updateExperience(exp.id, 'position', e.target.value)}
-                        placeholder="Job Title"
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">Start Date</Label>
-                      <Input
-                        type="month"
-                        value={exp.startDate}
-                        onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)}
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">End Date</Label>
-                      <Input
-                        type="month"
-                        value={exp.endDate}
-                        onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)}
-                        placeholder="Present"
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label className="text-foreground font-medium">Job Description</Label>
-                    <Textarea
-                      value={exp.description}
-                      onChange={(e) => updateExperience(exp.id, 'description', e.target.value)}
-                      placeholder="Describe your responsibilities and achievements..."
-                      className="min-h-[100px] border-border/50 focus:border-primary resize-none"
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="NAME">Full Name</Label>
+                    <Input
+                      id="NAME"
+                      value={formData.NAME}
+                      onChange={(e) => handleInputChange('NAME', e.target.value)}
+                      placeholder="John Doe"
                     />
                   </div>
-                  {experiences.length > 1 && (
-                    <Button
-                      onClick={() => removeExperience(exp.id)}
-                      variant="ghost"
-                      size="sm"
-                      className="absolute top-0 right-0 text-destructive hover:text-destructive hover:bg-destructive/10"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          {/* Education */}
-          <Card className="p-8 border-border/50">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-foreground flex items-center">
-                <div className="w-2 h-6 bg-gradient-to-b from-primary to-accent rounded-full mr-3"></div>
-                Education
-              </h2>
-              <Button onClick={addEducation} variant="outline" size="sm" className="border-primary/20 hover:bg-primary/10">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Education
-              </Button>
-            </div>
-            <div className="space-y-6">
-              {education.map((edu, index) => (
-                <div key={edu.id} className="relative">
-                  {index > 0 && <Separator className="mb-6" />}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">Institution</Label>
-                      <Input
-                        value={edu.institution}
-                        onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)}
-                        placeholder="University Name"
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">Degree</Label>
-                      <Input
-                        value={edu.degree}
-                        onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
-                        placeholder="Bachelor of Science in Computer Science"
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">Graduation Date</Label>
-                      <Input
-                        type="month"
-                        value={edu.graduationDate}
-                        onChange={(e) => updateEducation(edu.id, 'graduationDate', e.target.value)}
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-foreground font-medium">GPA (Optional)</Label>
-                      <Input
-                        value={edu.gpa}
-                        onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)}
-                        placeholder="3.8/4.0"
-                        className="border-border/50 focus:border-primary"
-                      />
-                    </div>
+                  <div>
+                    <Label htmlFor="PHONE">Phone Number</Label>
+                    <Input
+                      id="PHONE"
+                      value={formData.PHONE}
+                      onChange={(e) => handleInputChange('PHONE', e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                    />
                   </div>
-                  {education.length > 1 && (
-                    <Button
-                      onClick={() => removeEducation(edu.id)}
-                      variant="ghost"
-                      size="sm"
-                      className="absolute top-0 right-0 text-destructive hover:text-destructive hover:bg-destructive/10"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  )}
                 </div>
-              ))}
+                <div>
+                  <Label htmlFor="EMAIL">Email Address</Label>
+                  <Input
+                    id="EMAIL"
+                    type="email"
+                    value={formData.EMAIL}
+                    onChange={(e) => handleInputChange('EMAIL', e.target.value)}
+                    placeholder="john.doe@email.com"
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="LINKEDIN">LinkedIn Profile</Label>
+                    <Input
+                      id="LINKEDIN"
+                      value={formData.LINKEDIN}
+                      onChange={(e) => handleInputChange('LINKEDIN', e.target.value)}
+                      placeholder="linkedin.com/in/johndoe"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="GITHUB">GitHub Profile</Label>
+                    <Input
+                      id="GITHUB"
+                      value={formData.GITHUB}
+                      onChange={(e) => handleInputChange('GITHUB', e.target.value)}
+                      placeholder="github.com/johndoe"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </Card>
 
-          {/* Skills */}
-          <Card className="p-8 border-border/50">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center">
-              <div className="w-2 h-6 bg-gradient-to-b from-primary to-accent rounded-full mr-3"></div>
-              Skills
-            </h2>
-            <div className="space-y-2">
-              <Label htmlFor="skills" className="text-foreground font-medium">Technical Skills</Label>
-              <Textarea
-                id="skills"
-                value={skills}
-                onChange={(e) => setSkills(e.target.value)}
-                placeholder="List your technical skills, programming languages, tools, etc. (separated by commas)"
-                className="min-h-[100px] border-border/50 focus:border-primary resize-none"
-              />
+            {/* Education */}
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                  <GraduationCap className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Education</h2>
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="schoolName">School Name</Label>
+                    <Input
+                      id="schoolName"
+                      value={formData.schoolName}
+                      onChange={(e) => handleInputChange('schoolName', e.target.value)}
+                      placeholder="University of Example"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="dates">Dates</Label>
+                    <Input
+                      id="dates"
+                      value={formData.dates}
+                      onChange={(e) => handleInputChange('dates', e.target.value)}
+                      placeholder="2018 - 2022"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="degree">Degree</Label>
+                    <Input
+                      id="degree"
+                      value={formData.degree}
+                      onChange={(e) => handleInputChange('degree', e.target.value)}
+                      placeholder="Bachelor of Science in Computer Science"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="educationLocation">Location</Label>
+                    <Input
+                      id="educationLocation"
+                      value={formData.educationLocation}
+                      onChange={(e) => handleInputChange('educationLocation', e.target.value)}
+                      placeholder="New York, NY"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </Card>
 
-          {/* Generate Button */}
-          <div className="flex justify-center pt-8">
-            <Button onClick={generateResume} className="btn-primary text-xl px-12 py-4">
-              <Download className="h-6 w-6 mr-3" />
-              Generate Professional Resume
-            </Button>
+            {/* Experience */}
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                  <Briefcase className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Experience</h2>
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="companyName">Company Name</Label>
+                    <Input
+                      id="companyName"
+                      value={formData.companyName}
+                      onChange={(e) => handleInputChange('companyName', e.target.value)}
+                      placeholder="Tech Company Inc."
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="experienceLocation">Location</Label>
+                    <Input
+                      id="experienceLocation"
+                      value={formData.experienceLocation}
+                      onChange={(e) => handleInputChange('experienceLocation', e.target.value)}
+                      placeholder="San Francisco, CA"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="role">Role</Label>
+                  <Input
+                    id="role"
+                    value={formData.role}
+                    onChange={(e) => handleInputChange('role', e.target.value)}
+                    placeholder="Software Engineer"
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="startDate">Start Date</Label>
+                    <Input
+                      id="startDate"
+                      value={formData.startDate}
+                      onChange={(e) => handleInputChange('startDate', e.target.value)}
+                      placeholder="January 2022"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="endDate">End Date</Label>
+                    <Input
+                      id="endDate"
+                      value={formData.endDate}
+                      onChange={(e) => handleInputChange('endDate', e.target.value)}
+                      placeholder="Present"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <Label htmlFor="experiencePoint1">Experience Point 1</Label>
+                    <Textarea
+                      id="experiencePoint1"
+                      value={formData.experiencePoint1}
+                      onChange={(e) => handleInputChange('experiencePoint1', e.target.value)}
+                      placeholder="Developed and maintained web applications..."
+                      rows={2}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="experiencePoint2">Experience Point 2</Label>
+                    <Textarea
+                      id="experiencePoint2"
+                      value={formData.experiencePoint2}
+                      onChange={(e) => handleInputChange('experiencePoint2', e.target.value)}
+                      placeholder="Collaborated with cross-functional teams..."
+                      rows={2}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="experiencePoint3">Experience Point 3</Label>
+                    <Textarea
+                      id="experiencePoint3"
+                      value={formData.experiencePoint3}
+                      onChange={(e) => handleInputChange('experiencePoint3', e.target.value)}
+                      placeholder="Improved system performance by..."
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Projects */}
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                  <FolderOpen className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Projects</h2>
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="projectName">Project Name</Label>
+                    <Input
+                      id="projectName"
+                      value={formData.projectName}
+                      onChange={(e) => handleInputChange('projectName', e.target.value)}
+                      placeholder="E-commerce Platform"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="projectDate">Project Date</Label>
+                    <Input
+                      id="projectDate"
+                      value={formData.projectDate}
+                      onChange={(e) => handleInputChange('projectDate', e.target.value)}
+                      placeholder="March 2023"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="technologies">Technologies</Label>
+                  <Input
+                    id="technologies"
+                    value={formData.technologies}
+                    onChange={(e) => handleInputChange('technologies', e.target.value)}
+                    placeholder="React, Node.js, MongoDB"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <Label htmlFor="projectPoint1">Project Point 1</Label>
+                    <Textarea
+                      id="projectPoint1"
+                      value={formData.projectPoint1}
+                      onChange={(e) => handleInputChange('projectPoint1', e.target.value)}
+                      placeholder="Built a full-stack e-commerce platform..."
+                      rows={2}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="projectPoint2">Project Point 2</Label>
+                    <Textarea
+                      id="projectPoint2"
+                      value={formData.projectPoint2}
+                      onChange={(e) => handleInputChange('projectPoint2', e.target.value)}
+                      placeholder="Implemented secure payment processing..."
+                      rows={2}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="projectPoint3">Project Point 3</Label>
+                    <Textarea
+                      id="projectPoint3"
+                      value={formData.projectPoint3}
+                      onChange={(e) => handleInputChange('projectPoint3', e.target.value)}
+                      placeholder="Optimized database queries for better performance..."
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Technical Skills */}
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                  <Code className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Technical Skills</h2>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="languages">Languages</Label>
+                  <Input
+                    id="languages"
+                    value={formData.languages}
+                    onChange={(e) => handleInputChange('languages', e.target.value)}
+                    placeholder="JavaScript, Python, Java, C++"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="developerTools">Developer Tools</Label>
+                  <Input
+                    id="developerTools"
+                    value={formData.developerTools}
+                    onChange={(e) => handleInputChange('developerTools', e.target.value)}
+                    placeholder="Git, Docker, VS Code, Postman"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="technologiesFrameworks">Technologies/Frameworks</Label>
+                  <Input
+                    id="technologiesFrameworks"
+                    value={formData.technologiesFrameworks}
+                    onChange={(e) => handleInputChange('technologiesFrameworks', e.target.value)}
+                    placeholder="React, Node.js, Express, MongoDB"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Achievements */}
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                  <Award className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Achievements</h2>
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="organizationName">Organization Name</Label>
+                    <Input
+                      id="organizationName"
+                      value={formData.organizationName}
+                      onChange={(e) => handleInputChange('organizationName', e.target.value)}
+                      placeholder="Tech Innovation Society"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="achievementRole">Role</Label>
+                    <Input
+                      id="achievementRole"
+                      value={formData.achievementRole}
+                      onChange={(e) => handleInputChange('achievementRole', e.target.value)}
+                      placeholder="President"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="achievementStartDate">Start Date</Label>
+                    <Input
+                      id="achievementStartDate"
+                      value={formData.achievementStartDate}
+                      onChange={(e) => handleInputChange('achievementStartDate', e.target.value)}
+                      placeholder="January 2021"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="achievementEndDate">End Date</Label>
+                    <Input
+                      id="achievementEndDate"
+                      value={formData.achievementEndDate}
+                      onChange={(e) => handleInputChange('achievementEndDate', e.target.value)}
+                      placeholder="December 2021"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="achievementLocation">Location</Label>
+                  <Input
+                    id="achievementLocation"
+                    value={formData.achievementLocation}
+                    onChange={(e) => handleInputChange('achievementLocation', e.target.value)}
+                    placeholder="University Campus"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <Label htmlFor="achievementPoint1">Achievement Point 1</Label>
+                    <Textarea
+                      id="achievementPoint1"
+                      value={formData.achievementPoint1}
+                      onChange={(e) => handleInputChange('achievementPoint1', e.target.value)}
+                      placeholder="Led a team of 20 members in organizing tech events..."
+                      rows={2}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="achievementPoint2">Achievement Point 2</Label>
+                    <Textarea
+                      id="achievementPoint2"
+                      value={formData.achievementPoint2}
+                      onChange={(e) => handleInputChange('achievementPoint2', e.target.value)}
+                      placeholder="Increased membership by 150% during tenure..."
+                      rows={2}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="achievementPoint3">Achievement Point 3</Label>
+                    <Textarea
+                      id="achievementPoint3"
+                      value={formData.achievementPoint3}
+                      onChange={(e) => handleInputChange('achievementPoint3', e.target.value)}
+                      placeholder="Secured $10,000 in sponsorships for annual tech conference..."
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Preview Section */}
+          <div className="lg:sticky lg:top-24 h-fit">
+            <div className="card p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-muted-foreground to-muted-foreground p-2 rounded-lg">
+                  <Eye className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h2 className="text-xl font-semibold text-card-foreground">Live Preview</h2>
+              </div>
+              <div className="bg-muted/30 rounded-lg p-8 min-h-[600px] flex items-center justify-center border-2 border-dashed border-muted">
+                <div className="text-center text-muted-foreground">
+                  <div className="bg-gradient-to-r from-muted-foreground to-muted-foreground p-4 rounded-xl inline-block mb-4 opacity-50">
+                    <FileText className="h-12 w-12 text-primary-foreground" />
+                  </div>
+                  <p className="text-lg font-medium mb-2">Preview Coming Soon</p>
+                  <p className="text-sm max-w-xs mx-auto">Fill out the form to see your beautifully formatted resume preview</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
