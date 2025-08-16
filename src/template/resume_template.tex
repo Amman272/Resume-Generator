@@ -1,0 +1,326 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+
+
+% --- Begin glyphtounicode mappings ---
+\pdfglyphtounicode{A}{0041}
+\pdfglyphtounicode{B}{0042}
+\pdfglyphtounicode{C}{0043}
+\pdfglyphtounicode{D}{0044}
+\pdfglyphtounicode{E}{0045}
+\pdfglyphtounicode{F}{0046}
+\pdfglyphtounicode{G}{0047}
+\pdfglyphtounicode{H}{0048}
+\pdfglyphtounicode{I}{0049}
+\pdfglyphtounicode{J}{004A}
+\pdfglyphtounicode{K}{004B}
+\pdfglyphtounicode{L}{004C}
+\pdfglyphtounicode{M}{004D}
+\pdfglyphtounicode{N}{004E}
+\pdfglyphtounicode{O}{004F}
+\pdfglyphtounicode{P}{0050}
+\pdfglyphtounicode{Q}{0051}
+\pdfglyphtounicode{R}{0052}
+\pdfglyphtounicode{S}{0053}
+\pdfglyphtounicode{T}{0054}
+\pdfglyphtounicode{U}{0055}
+\pdfglyphtounicode{V}{0056}
+\pdfglyphtounicode{W}{0057}
+\pdfglyphtounicode{X}{0058}
+\pdfglyphtounicode{Y}{0059}
+\pdfglyphtounicode{Z}{005A}
+\pdfglyphtounicode{a}{0061}
+\pdfglyphtounicode{b}{0062}
+\pdfglyphtounicode{c}{0063}
+\pdfglyphtounicode{d}{0064}
+\pdfglyphtounicode{e}{0065}
+\pdfglyphtounicode{f}{0066}
+\pdfglyphtounicode{g}{0067}
+\pdfglyphtounicode{h}{0068}
+\pdfglyphtounicode{i}{0069}
+\pdfglyphtounicode{j}{006A}
+\pdfglyphtounicode{k}{006B}
+\pdfglyphtounicode{l}{006C}
+\pdfglyphtounicode{m}{006D}
+\pdfglyphtounicode{n}{006E}
+\pdfglyphtounicode{o}{006F}
+\pdfglyphtounicode{p}{0070}
+\pdfglyphtounicode{q}{0071}
+\pdfglyphtounicode{r}{0072}
+\pdfglyphtounicode{s}{0073}
+\pdfglyphtounicode{t}{0074}
+\pdfglyphtounicode{u}{0075}
+\pdfglyphtounicode{v}{0076}
+\pdfglyphtounicode{w}{0077}
+\pdfglyphtounicode{x}{0078}
+\pdfglyphtounicode{y}{0079}
+\pdfglyphtounicode{z}{007A}
+\pdfglyphtounicode{0}{0030}
+\pdfglyphtounicode{1}{0031}
+\pdfglyphtounicode{2}{0032}
+\pdfglyphtounicode{3}{0033}
+\pdfglyphtounicode{4}{0034}
+\pdfglyphtounicode{5}{0035}
+\pdfglyphtounicode{6}{0036}
+\pdfglyphtounicode{7}{0037}
+\pdfglyphtounicode{8}{0038}
+\pdfglyphtounicode{9}{0039}
+\pdfglyphtounicode{space}{0020}
+\pdfglyphtounicode{hyphen}{002D}
+\pdfglyphtounicode{period}{002E}
+% --- End glyphtounicode mappings ---
+
+% Ensure PDF is machine-readable
+\pdfgentounicode=1
+
+
+\pdfgentounicode=1
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    {\Huge \scshape {{FULL_NAME}}} \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ {{PHONE_NUMBER}} ~ 
+    \href{mailto:{{EMAIL_ADDRESS}}}{\raisebox{-0.2\height}\faEnvelope\  \underline{{EMAIL_ADDRESS}}} ~ 
+    \href{https://linkedin.com/in/{{LINKEDIN_USERNAME}}}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/{{LINKEDIN_USERNAME}}}}  ~
+    \href{https://github.com/{{GITHUB_USERNAME}}}{\raisebox{-0.2\height}\faGithub\ \underline{github.com/{{GITHUB_USERNAME}}}}
+    \vspace{-8pt}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {{UNIVERSITY_NAME}}{{START_DATE}} -- {{END_DATE}}
+      {{DEGREE_NAME}}{{CITY_STATE}}
+  \resumeSubHeadingListEnd
+
+%------RELEVANT COURSEWORK-------
+% \section{Relevant Coursework}
+%     %\resumeSubHeadingListStart
+%         \begin{multicols}{4}
+%             \begin{itemize}[itemsep=-5pt, parsep=3pt]
+%                 \item\small Data Structures
+%                 \item Software Methodology
+%                 \item Algorithms Analysis
+%                 \item Database Management
+%                 \item Artificial Intelligence
+%                 \item Internet Technology
+%                 \item Systems Programming
+%                 \item Computer Architecture
+%             \end{itemize}
+%         \end{multicols}
+%         \vspace*{2.0\multicolsep}
+%     %\resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  % \resumeSubHeadingListStart
+
+  %   \resumeSubheading
+  %     {Electronics Company}{May 2020 -- August 2020}
+  %     {Software Engineer Intern}{City, State}
+  %     \resumeItemListStart
+  %       \resumeItem{Developed a service to automatically perform a set of unit tests daily on a product in development in order to decrease time needed for team members to identify and fix bugs/issues.}
+  %       \resumeItem{Incorporated scripts using Python and PowerShell to aggregate XML test results into an organized format and to load the latest build code onto the hardware, so that daily testing can be performed.}
+  %       \resumeItem{Utilized Jenkins to provide a continuous integration service in order to automate the entire process of loading the latest build code and test files, running the tests, and generating a report of the results once per day.}
+  %       \resumeItem{Explored ways to visualize and send a daily report of test results to team members  using HTML, Javascript, and CSS.}
+  %     \resumeItemListEnd
+
+   
+  % \resumeSubHeadingListEnd
+  \resumeSubheading
+  { {{companyName}} }{ {{location}} }
+  { {{role}} }{ {{startDate}} -- {{endDate}} }
+  \resumeItemListStart
+    \resumeItem{ {{experiencePoint1}} }
+    \resumeItem{ {{experiencePoint2}} }
+    \resumeItem{ {{experiencePoint3}} }
+  \resumeItemListEnd
+
+\vspace{-16pt}
+
+
+%-----------PROJECTS-----------
+% \section{Projects}
+%     \vspace{-5pt}
+%     \resumeSubHeadingListStart
+%       \resumeProjectHeading
+%           {\textbf{Gym Reservation Bot} $|$ \emph{Python, Selenium, Google Cloud Console}}{January 2021}
+%           \resumeItemListStart
+%             \resumeItem{Developed an automatic bot using Python and Google Cloud Console to register myself for a timeslot at my school gym.}
+%             \resumeItem{Implemented Selenium to create an instance of Chrome in order to interact with the correct elements of the web page.}
+%             \resumeItem{Created a Linux virtual machine to run on Google Cloud so that the program is able to run everyday from the cloud.}
+%             \resumeItem{Used Cron to schedule the program to execute automatically at 11 AM every morning so a reservation is made for me.}
+%           \resumeItemListEnd
+%           \vspace{-13pt}
+%       \resumeProjectHeading
+%           {\textbf{Ticket Price Calculator App} $|$ \emph{Java, Android Studio}}{November 2020}
+%           \resumeItemListStart
+%             \resumeItem{Created an Android application using Java and Android Studio to calculate ticket prices for trips to museums in NYC.}
+%             \resumeItem{Processed user inputted information in the back-end of the app to return a subtotal price based on the tickets selected.}
+%             \resumeItem{Utilized the layout editor to create a UI for the application in order to allow different scenes to interact with each other.}
+%           \resumeItemListEnd 
+%           \vspace{-13pt}
+%           \resumeProjectHeading
+%           {\textbf{Transaction Management GUI} $|$ \emph{Java, Eclipse, JavaFX}}{October 2020}
+%           \resumeItemListStart
+%             \resumeItem{Designed a sample banking transaction system using Java to simulate the common functions of using a bank account.}
+%             \resumeItem{Used JavaFX to create a GUI that supports actions such as creating an account, deposit, withdraw, list all acounts, etc.}
+%             \resumeItem{Implemented object-oriented programming practices such as inheritance to create different account types and databases.}
+%           \resumeItemListEnd 
+%     \resumeSubHeadingListEnd
+% \vspace{-15pt}
+
+\section{Projects}
+\vspace{-5pt}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+      {\textbf{ {{projectName}} } $|$ \emph{ {{technologies}} }}{ {{projectDate}} }
+      \resumeItemListStart
+        \resumeItem{ {{projectPoint1}} }
+        \resumeItem{ {{projectPoint2}} }
+        \resumeItem{ {{projectPoint3}} }
+      \resumeItemListEnd
+      \vspace{-13pt}
+\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: {{languages}}} \\
+     \textbf{Developer Tools}{: {{developerTools}}} \\
+     \textbf{Technologies/Frameworks}{: {{technologiesFrameworks}}} \\
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+%-----------ACHIEVEMENTS-----------
+\section{Achievements}
+\resumeSubHeadingListStart
+    \resumeSubheading
+        { {{organizationName}} }{ {{startDate}} -- {{endDate}} }{ {{role}} }{ {{location}} }
+        \resumeItemListStart
+            \resumeItem{ {{achievementPoint1}} }
+            \resumeItem{ {{achievementPoint2}} }
+            \resumeItem{ {{achievementPoint3}} }
+        \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\end{document}
