@@ -3,6 +3,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import path, { dirname, join } from "path";
 import Handlebars from "handlebars";
+
 const router = Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,7 +17,6 @@ function LatexFormat() {
 
 function userLatex() {
   const name = Date.now();
-  //paths
   const src = path.join(__dirname, "template", "resume_template.tex");
   const destDir = path.join(__dirname, "template", "userLatex");
   const dest = path.join(destDir, `${name}.tex`);
@@ -29,11 +29,13 @@ function userLatex() {
   console.log("copied");
   return name;
 }
+
 function editLatex(name, data) {
   let latex = fs.readFileSync(
     path.join(__dirname, "template", "userLatex", `${name}.tex`),
     "utf8"
   );
+
   if (data.companyName_3 == "") {
     latex = latex.replace(/%START-E2[\s\S]*?%END-E2/g, "");
   }
@@ -41,14 +43,13 @@ function editLatex(name, data) {
     latex = latex.replace(/%START-E3[\s\S]*?%END-E3/g, "");
   }
 
-  //
   if (data.projectName_2 == "") {
     latex = latex.replace(/%START-PROJECT-2[\s\S]*?%END-PROJECT-2/g, "");
   }
   if (data.projectName_3 == "") {
     latex = latex.replace(/%START-PROJECT-3[\s\S]*?%END-PROJECT-3/g, "");
   }
-  //
+
   if (data.organizationName_2 == "") {
     latex = latex.replace(/%START-A2[\s\S]*?%END-A2/g, "");
   }
@@ -62,7 +63,7 @@ function editLatex(name, data) {
     "utf8"
   );
 }
-//////////////////////////////
+
 function insertData(name, data) {
   let latex = fs.readFileSync(
     path.join(__dirname, "template", "userLatex", `${name}.tex`),
@@ -75,13 +76,38 @@ function insertData(name, data) {
     filled,
     "utf8"
   );
+  console.log("all done succesfullly");
+}
+
+/**
+ 
+ * @param {string} text - 
+ * @returns {string} 
+ */
+function escapeLatex(text) {
+  if (typeof text !== 'string') {
+    return text;
+  }
+  return text
+    .replace(/\\/g, '\\textbackslash{}')
+    .replace(/&/g, '\\&')
+    .replace(/%/g, '\\%')
+    .replace(/\$/g, '\\$')
+    .replace(/#/g, '\\#')
+    .replace(/_/g, '\\_')
+    .replace(/{/g, '\\{')
+    .replace(/}/g, '\\}')
+    .replace(/~/g, '\\textasciitilde{}')
+    .replace(/\^/g, '\\textasciicircum{}');
 }
 
 router.post("/", async (req, res) => {
   const data = req.body.formData;
-  // data.experiences = data.experiences[0];
-  //data.projects = data.projects[0];
-  // console.log(data);
+
+  for (const key in data) {
+    data[key] = escapeLatex(data[key]);
+  }
+
   res.status(200).json({ message: "sent" });
 
   try {
