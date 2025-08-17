@@ -16,7 +16,7 @@
 \setlength{\multicolsep}{-3.0pt}
 \setlength{\columnsep}{-1pt}
 
-% --- glyphtounicode ---
+% --- Begin glyphtounicode mappings ---
 \pdfglyphtounicode{A}{0041}
 \pdfglyphtounicode{B}{0042}
 \pdfglyphtounicode{C}{0043}
@@ -82,11 +82,17 @@
 \pdfglyphtounicode{space}{0020}
 \pdfglyphtounicode{hyphen}{002D}
 \pdfglyphtounicode{period}{002E}
+% --- End glyphtounicode mappings ---
 \pdfgentounicode=1
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% serif
+% \usepackage{CormorantGaramond}
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -101,67 +107,83 @@
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-\titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large\bfseries}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-% Custom commands
+%-------------------------------------------
+% Custom commands (fixed for Handlebars)
 \newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
-\newcommand{\resumeSubheading}[4]{\vspace{-2pt}\item
-    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & \textbf{\small #2} \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}}
-\newcommand{\resumeProjectHeading}[2]{\item
-    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & \textbf{\small #2}\\
-    \end{tabular*}\vspace{-7pt}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\classesList}[4]{\item\small{#1 #2 #3 #4 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubSubheading}[2]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textit{\small#1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+  \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %----------HEADING----------
 \begin{center}
-    {\Huge \scshape {{{FULL_NAME}}}} \\ \vspace{1pt}
+    {\Huge \scshape {{{FULL_NAME}}} \\ \vspace{1pt}
     \small \raisebox{-0.1\height}\faPhone\ {{{PHONE_NUMBER}}} ~ 
-    \href{mailto:{{{EMAIL_ADDRESS}}}}{\raisebox{-0.2\height}\faEnvelope\  \underline{{{EMAIL_ADDRESS}}}} ~ 
-    \href{https://linkedin.com/in/{{{LINKEDIN_USERNAME}}}}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/{{{LINKEDIN_USERNAME}}}}}  ~
+    \href{mailto:{{{EMAIL_ADDRESS}}}{\raisebox{-0.2\height}\faEnvelope\  \underline{{{EMAIL_ADDRESS}}} ~ 
+    \href{https://linkedin.com/in/{{{LINKEDIN_USERNAME}}}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/{{{LINKEDIN_USERNAME}}}}}  ~
     \href{https://github.com/{{{GITHUB_USERNAME}}}}{\raisebox{-0.2\height}\faGithub\ \underline{github.com/{{{GITHUB_USERNAME}}}}}
     \vspace{-8pt}
 \end{center}
 
 %-----------EDUCATION-----------
 \section{Education}
-\resumeSubHeadingListStart
+  \resumeSubHeadingListStart
     \resumeSubheading
       {{{UNIVERSITY_NAME}}}{{{START_DATE}}} -- {{{END_DATE}}}
       {{{DEGREE_NAME}}}{{{CITY_STATE}}}
-\resumeSubHeadingListEnd
+  \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
 \section{Experience}
-\resumeSubHeadingListStart
-
 \resumeSubheading
   { {{{companyName_1}}} }{ {{{experienceLocation_1}}} }
   { {{{role_1}}} }{ {{{startDate_1}}} -- {{{endDate_1}}} }
-\resumeItemListStart
+  \resumeItemListStart
     \resumeItem{ {{{experiencePoint1_1}}} }
     \resumeItem{ {{{experiencePoint2_1}}} }
     \resumeItem{ {{{experiencePoint3_1}}} }
-\resumeItemListEnd
+  \resumeItemListEnd
 
 % Experience 2
 %START-E2
 \resumeSubheading
   { {{{companyName_2}}} }{ {{{experienceLocation_2}}} }
   { {{{role_2}}} }{ {{{startDate_2}}} -- {{{endDate_2}}} }
-\resumeItemListStart
+  \resumeItemListStart
     \resumeItem{ {{{experiencePoint1_2}}} }
     \resumeItem{ {{{experiencePoint2_2}}} }
     \resumeItem{ {{{experiencePoint3_2}}} }
-\vspace{-16pt}
+  \resumeItemListEnd
 %END-E2
 
 % Experience 3
@@ -169,77 +191,79 @@
 \resumeSubheading
   { {{{companyName_3}}} }{ {{{experienceLocation_3}}} }
   { {{{role_3}}} }{ {{{startDate_3}}} -- {{{endDate_3}}} }
-\resumeItemListStart
+  \resumeItemListStart
     \resumeItem{ {{{experiencePoint1_3}}} }
     \resumeItem{ {{{experiencePoint2_3}}} }
     \resumeItem{ {{{experiencePoint3_3}}} }
-\vspace{-16pt}
+  \resumeItemListEnd
 %END-E3
-
-\resumeSubHeadingListEnd
 
 %-----------PROJECTS-----------
 \section{Projects}
 \resumeSubHeadingListStart
-
+% Project 1
 \resumeProjectHeading
-  {\textbf{ {{{projectName_1}}} } $|$ \emph{ {{{technologies_1}}} }}{ {{{projectDate_1}}} }
-\resumeItemListStart
-    \resumeItem{ {{{projectPoint1_1}}} }
-    \resumeItem{ {{{projectPoint2_1}}} }
-    \resumeItem{ {{{projectPoint3_1}}} }
-\resumeItemListEnd
-\vspace{-13pt}
-
+    {\textbf{ {{{projectName_1}}} } $|$ \emph{ {{{technologies_1}}} }}{ {{{projectDate_1}}} }
+    \resumeItemListStart
+      \resumeItem{ {{{projectPoint1_1}}} }
+      \resumeItem{ {{{projectPoint2_1}}} }
+      \resumeItem{ {{{projectPoint3_1}}} }
+    \resumeItemListEnd
 % Project 2
 %START-PROJECT-2
 \resumeProjectHeading
-  {\textbf{ {{{projectName_2}}} } $|$ \emph{ {{{technologies_2}}} }}{ {{{projectDate_2}}} }
-\resumeItemListStart
-    \resumeItem{ {{{projectPoint1_2}}} }
-    \resumeItem{ {{{projectPoint2_2}}} }
-    \resumeItem{ {{{projectPoint3_2}}} }
-\resumeItemListEnd
-\vspace{-13pt}
+    {\textbf{ {{{projectName_2}}} } $|$ \emph{ {{{technologies_2}}} }}{ {{{projectDate_2}}} }
+    \resumeItemListStart
+      \resumeItem{ {{{projectPoint1_2}}} }
+      \resumeItem{ {{{projectPoint2_2}}} }
+      \resumeItem{ {{{projectPoint3_2}}} }
+    \resumeItemListEnd
 %END-PROJECT-2
-
 % Project 3
 %START-PROJECT-3
 \resumeProjectHeading
-  {\textbf{ {{{projectName_3}}} } $|$ \emph{ {{{technologies_3}}} }}{ {{{projectDate_3}}} }
-\resumeItemListStart
-    \resumeItem{ {{{projectPoint1_3}}} }
-    \resumeItem{ {{{projectPoint2_3}}} }
-    \resumeItem{ {{{projectPoint3_3}}} }
-\resumeItemListEnd
-\vspace{-13pt}
+    {\textbf{ {{{projectName_3}}} } $|$ \emph{ {{{technologies_3}}} }}{ {{{projectDate_3}}} }
+    \resumeItemListStart
+      \resumeItem{ {{{projectPoint1_3}}} }
+      \resumeItem{ {{{projectPoint2_3}}} }
+      \resumeItem{ {{{projectPoint3_3}}} }
+    \resumeItemListEnd
 %END-PROJECT-3
-
 \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: {{{languages}}}} \\
+     \textbf{Developer Tools}{: {{{developerTools}}}} \\
+     \textbf{Technologies/Frameworks}{: {{{technologiesFrameworks}}}} \\
+    }}
+\end{itemize}
+\vspace{-16pt}
 
 %-----------ACHIEVEMENTS-----------
 \section{Achievements}
 \resumeSubHeadingListStart
-
-% Achievement 1
-\resumeItemListStart
-    \resumeItem{ {{{achievement_1}}} }
-\resumeItemListEnd
-
-% Achievement 2
+\resumeSubheading
+    { {{{organizationName_1}}} }{ {{{achievementStartDate_1}}} -- {{{achievementEndDate_1}}} }{ {{{achievementRole_1}}} }{ {{{achievementLocation_1}}} }
+    \resumeItemListStart
+        \resumeItem{ {{{achievementPoint_1}}} }
+    \resumeItemListEnd
 %START-A2
-\resumeItemListStart
-    \resumeItem{ {{{achievement_2}}} }
-\resumeItemListEnd
+\resumeSubheading
+    { {{{organizationName_2}}} }{ {{{achievementStartDate_2}}} -- {{{achievementEndDate_2}}} }{ {{{achievementRole_2}}} }{ {{{achievementLocation_2}}} }
+    \resumeItemListStart
+        \resumeItem{ {{{achievementPoint_2}}} }
+    \resumeItemListEnd
 %END-A2
-
-% Achievement 3
 %START-A3
-\resumeItemListStart
-    \resumeItem{ {{{achievement_3}}} }
-\resumeItemListEnd
+\resumeSubheading
+    { {{{organizationName_3}}} }{ {{{achievementStartDate_3}}} -- {{{achievementEndDate_3}}} }{ {{{achievementRole_3}}} }{ {{{achievementLocation_3}}} }
+    \resumeItemListStart
+        \resumeItem{ {{{achievementPoint_3}}} }
+    \resumeItemListEnd
 %END-A3
-
 \resumeSubHeadingListEnd
 
 \end{document}

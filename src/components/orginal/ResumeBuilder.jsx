@@ -11,102 +11,96 @@ import axios from 'axios';
 const ResumeBuilder = () => {
   console.log('ResumeBuilder component loading...');
   const [formData, setFormData] = useState({
-  NAME: 'John Doe',
-  PHONE: '+91 9876543210',
-  EMAIL: 'john.doe@example.com',
-  LINKEDIN: 'linkedin.com/in/johndoe',
-  GITHUB: 'github.com/johndoe',
-
-  // Education
-  schoolName: 'Indian Institute of Technology, Delhi',
-  dates: 'Aug 2019 – May 2023',
-  degree: 'B.Tech in Computer Science',
-  educationLocation: 'New Delhi, India',
-
-  // Experience 1
-  companyName_1: 'Google',
-  experienceLocation_1: 'Bangalore, India',
-  role_1: 'Software Engineering Intern',
-  startDate_1: 'May 2022',
-  endDate_1: 'July 2022',
-  experiencePoint1_1: 'Built a dashboard for internal analytics using React and Node.js',
-  experiencePoint2_1: 'Optimized API responses by 30% with caching mechanisms',
-  experiencePoint3_1: 'Collaborated with a team of 6 engineers using Agile practices',
-
-  // Experience 2
-  companyName_2: 'Microsoft',
-  experienceLocation_2: 'Hyderabad, India',
-  role_2: 'Software Developer',
-  startDate_2: 'July 2023',
-  endDate_2: 'Present',
-  experiencePoint1_2: 'Developing features for Azure cloud services in C++',
-  experiencePoint2_2: 'Implemented CI/CD pipelines improving deployment speed',
-  experiencePoint3_2: 'Mentored 2 interns on backend development best practices',
-
-  // Experience 3
-  companyName_3: 'StartUpX',
-  experienceLocation_3: 'Remote',
-  role_3: 'Full-Stack Developer',
-  startDate_3: 'Jan 2021',
-  endDate_3: 'Dec 2021',
-  experiencePoint1_3: 'Designed REST APIs with Express and MongoDB',
-  experiencePoint2_3: 'Developed responsive UI with React and Tailwind CSS',
-  experiencePoint3_3: 'Integrated payment gateway for subscription services',
-
-  // Project 1
-  projectName_1: 'Resume Generator',
-  technologies_1: 'React, Node.js, LaTeX',
-  projectDate_1: '2024',
-  projectPoint1_1: 'Built a dynamic resume builder with LaTeX templates',
-  projectPoint2_1: 'Implemented PDF generation with backend APIs',
-  projectPoint3_1: 'Integrated drag-and-drop UI for customization',
-
-  // Project 2
-  projectName_2: 'E-Commerce Website',
-  technologies_2: 'MERN Stack',
-  projectDate_2: '2023',
-  projectPoint1_2: 'Developed full-stack shopping platform with cart and checkout',
-  projectPoint2_2: 'Implemented JWT authentication and role-based access',
-  projectPoint3_2: 'Deployed using Docker and AWS EC2',
-
-  // Project 3
-  projectName_3: 'Chat Application',
-  technologies_3: 'Socket.io, Node.js, React',
-  projectDate_3: '2022',
-  projectPoint1_3: 'Implemented real-time messaging with WebSockets',
-  projectPoint2_3: 'Added user authentication and private chat rooms',
-  projectPoint3_3: 'Designed a clean, responsive UI with Tailwind CSS',
-
-  // Technical Skills
-  languages: 'C++, Java, Python, JavaScript',
-  developerTools: 'Git, Docker, VS Code, Postman',
-  technologiesFrameworks: 'React, Node.js, Express, MongoDB, AWS',
-
-  // Achievement 1
-  organizationName_1: 'HackathonX',
-  achievementStartDate_1: 'Nov 2022',
-  achievementEndDate_1: 'Nov 2022',
-  achievementRole_1: 'Team Lead',
-  achievementLocation_1: 'Delhi, India',
-  achievementPoint_1: 'Won 1st prize for developing a smart health monitoring app',
-
-  // Achievement 2
-  organizationName_2: 'Coding Club, IIT Delhi',
-  achievementStartDate_2: '2021',
-  achievementEndDate_2: '2023',
-  achievementRole_2: 'Core Member',
-  achievementLocation_2: 'New Delhi, India',
-  achievementPoint_2: 'Organized coding contests and mentored juniors in DSA',
-
-  // Achievement 3
-  organizationName_3: 'LeetCode',
-  achievementStartDate_3: '2020',
-  achievementEndDate_3: 'Present',
-  achievementRole_3: 'Problem Solver',
-  achievementLocation_3: 'Online',
-  achievementPoint_3: 'Solved 600+ problems with 1500+ rating in contests'
-}
-);
+    // Contact (5 fields)
+    NAME: '',
+    PHONE: '',
+    EMAIL: '',
+    LINKEDIN: '',
+    GITHUB: '',
+    
+    // Education (4 fields)
+    schoolName: '',
+    dates: '',
+    degree: '',
+    educationLocation: '',
+    
+    // Experience (3 hardcoded experiences)
+    companyName_1: '',
+    experienceLocation_1: '',
+    role_1: '',
+    startDate_1: '',
+    endDate_1: '',
+    experiencePoint1_1: '',
+    experiencePoint2_1: '',
+    experiencePoint3_1: '',
+    
+    companyName_2: '',
+    experienceLocation_2: '',
+    role_2: '',
+    startDate_2: '',
+    endDate_2: '',
+    experiencePoint1_2: '',
+    experiencePoint2_2: '',
+    experiencePoint3_2: '',
+    
+    companyName_3: '',
+    experienceLocation_3: '',
+    role_3: '',
+    startDate_3: '',
+    endDate_3: '',
+    experiencePoint1_3: '',
+    experiencePoint2_3: '',
+    experiencePoint3_3: '',
+    
+    // Projects (3 hardcoded projects)
+    projectName_1: '',
+    technologies_1: '',
+    projectDate_1: '',
+    projectPoint1_1: '',
+    projectPoint2_1: '',
+    projectPoint3_1: '',
+    
+    projectName_2: '',
+    technologies_2: '',
+    projectDate_2: '',
+    projectPoint1_2: '',
+    projectPoint2_2: '',
+    projectPoint3_2: '',
+    
+    projectName_3: '',
+    technologies_3: '',
+    projectDate_3: '',
+    projectPoint1_3: '',
+    projectPoint2_3: '',
+    projectPoint3_3: '',
+    
+    // Technical Skills (3 fields)
+    languages: '',
+    developerTools: '',
+    technologiesFrameworks: '',
+    
+    // Achievements (3 hardcoded achievements, 1 point each)
+    organizationName_1: '',
+    achievementStartDate_1: '',
+    achievementEndDate_1: '',
+    achievementRole_1: '',
+    achievementLocation_1: '',
+    achievementPoint_1: '',
+    
+    organizationName_2: '',
+    achievementStartDate_2: '',
+    achievementEndDate_2: '',
+    achievementRole_2: '',
+    achievementLocation_2: '',
+    achievementPoint_2: '',
+    
+    organizationName_3: '',
+    achievementStartDate_3: '',
+    achievementEndDate_3: '',
+    achievementRole_3: '',
+    achievementLocation_3: '',
+    achievementPoint_3: ''
+  });
 
   // Visibility state for sections
   const [visibleSections, setVisibleSections] = useState({
