@@ -1,0 +1,205 @@
+\documentclass[letterpaper,11pt]{article}
+
+%--- PACKAGES ---
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+%--- LAYOUT & MARGINS ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+
+%--- CUSTOM COMMANDS ---
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+
+%======================================================================
+%                           DOCUMENT START
+%======================================================================
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+    {\Huge \scshape mohammad Amman } \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ +91 9876543210 ~
+    \href{mailto:john.doe@example.com }{\raisebox{-0.2\height}\faEnvelope\  \underline{ john.doe@example.com }} ~
+    \href{https://linkedin.com/in/johndoe }{\raisebox{-0.2\height}\faLinkedin\ \underline{ linkedin.com/in/johndoe }}  ~
+    \href{https://github.com/johndoe }{\raisebox{-0.2\height}\faGithub\ \underline{ github.com/johndoe }}
+    \vspace{-8pt}
+\end{center}
+%----------- EDUCATION -----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    { Indian Institute of Technology, Delhi }{ Aug 2019 – May 2023 }
+    { B.Tech in Computer Science }{ New Delhi, India }
+\resumeSubHeadingListEnd
+
+%----------- EXPERIENCE -----------
+\section{Experience}
+\resumeSubHeadingListStart
+  % --- Experience 1 ---
+  \resumeSubheading
+    { Google }{ May 2022 -- July 2022 }
+    { Software Engineering Intern }{ Bangalore, India }
+    \resumeItemListStart
+      \resumeItem{ Built a dashboard for internal analytics using React and Node.js }
+      \resumeItem{ Optimized API responses by 30\% with caching mechanisms }
+      \resumeItem{ Collaborated with a team of 6 engineers using Agile practices }
+    \resumeItemListEnd
+
+  % --- Experience 2 ---
+  %START-E2
+  \resumeSubheading
+    { Microsoft }{ July 2023 -- Present }
+    { Software Developer }{ Hyderabad, India }
+    \resumeItemListStart
+      \resumeItem{ Developing features for Azure cloud services in C++ }
+      \resumeItem{ Implemented CI/CD pipelines improving deployment speed }
+      \resumeItem{ Mentored 2 interns on backend development best practices }
+    \resumeItemListEnd
+  %END-E2
+    
+  % --- Experience 3 ---
+  %START-E3
+  \resumeSubheading
+    { StartUpX }{ Jan 2021 -- Dec 2021 }
+    { Full-Stack Developer }{ Remote }
+    \resumeItemListStart
+      \resumeItem{ Designed REST APIs with Express and MongoDB }
+      \resumeItem{ Developed responsive UI with React and Tailwind CSS }
+      \resumeItem{ Integrated payment gateway for subscription services }
+    \resumeItemListEnd
+  %END-E3
+\resumeSubHeadingListEnd
+\vspace{-16pt}
+
+%----------- PROJECTS -----------
+\section{Projects}
+\vspace{-5pt}
+\resumeSubHeadingListStart
+  % --- Project 1 ---
+  \resumeProjectHeading
+    {\textbf{ Resume Generator } $|$ \emph{ React, Node.js, LaTeX }}{ 2024 }
+    \resumeItemListStart
+      \resumeItem{ Built a dynamic resume builder with LaTeX templates }
+      \resumeItem{ Implemented PDF generation with backend APIs }
+      \resumeItem{ Integrated drag-and-drop UI for customization }
+    \resumeItemListEnd
+    \vspace{-13pt}
+
+  % --- Project 2 ---
+  %START-PROJECT-2
+  \resumeProjectHeading
+    {\textbf{ E-Commerce Website } $|$ \emph{ MERN Stack }}{ 2023 }
+    \resumeItemListStart
+      \resumeItem{ Developed full-stack shopping platform with cart and checkout }
+      \resumeItem{ Implemented JWT authentication and role-based access }
+      \resumeItem{ Deployed using Docker and AWS EC2 }
+    \resumeItemListEnd
+    \vspace{-13pt}
+  %END-PROJECT-2
+
+  % --- Project 3 ---
+  %START-PROJECT-3
+  \resumeProjectHeading
+    {\textbf{ Chat Application } $|$ \emph{ Socket.io, Node.js, React }}{ 2022 }
+    \resumeItemListStart
+      \resumeItem{ Implemented real-time messaging with WebSockets }
+      \resumeItem{ Added user authentication and private chat rooms }
+      \resumeItem{ Designed a clean, responsive UI with Tailwind CSS }
+    \resumeItemListEnd
+  %END-PROJECT-3
+\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%----------- TECHNICAL SKILLS -----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{Languages}{: C++, Java, Python, JavaScript } \\
+    \textbf{Developer Tools}{: Git, Docker, VS Code, Postman } \\
+    \textbf{Technologies/Frameworks}{: React, Node.js, Express, MongoDB, AWS } \\
+  }}
+\end{itemize}
+\vspace{-16pt}
+
+%----------- ACHIEVEMENTS -----------
+\section{Achievements}
+\resumeSubHeadingListStart
+  % --- Achievement 1 ---
+  \resumeSubheading
+    { HackathonX }{ Nov 2022 -- Nov 2022 }
+    { Team Lead }{ Delhi, India }
+    \resumeItemListStart
+      \resumeItem{ Won 1st prize for developing a smart health monitoring app }
+    \resumeItemListEnd
+
+  % --- Achievement 2 ---
+  %START-A2
+  \resumeSubheading
+    { Coding Club, IIT Delhi }{ 2021 -- 2023 }
+    { Core Member }{ New Delhi, India }
+    \resumeItemListStart
+      \resumeItem{ Organized coding contests and mentored juniors in DSA }
+    \resumeItemListEnd
+  %END-A2
+    
+  % --- Achievement 3 ---
+  %START-A3
+  \resumeSubheading
+    { LeetCode }{ 2020 -- Present }
+    { Problem Solver }{ Online }
+    \resumeItemListStart
+      \resumeItem{ Solved 600+ problems with 1500+ rating in contests }
+    \resumeItemListEnd
+  %END-A3
+\resumeSubHeadingListEnd
+
+\end{document}
