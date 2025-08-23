@@ -9,6 +9,9 @@ import { Result } from 'postcss';
 import axios from 'axios';
 
 const ResumeBuilder = () => {
+
+  const [isLoading,setIsLoading]=useState(false);
+  const [error, setError] = useState(null);
   console.log('ResumeBuilder component loading...');
   const [formData, setFormData] = useState({
   NAME: 'John Doe',
@@ -248,9 +251,29 @@ const ResumeBuilder = () => {
     console.log('Visible Sections:', visibleSections);
   }
 async function sendBack(){
+    setIsLoading(true);
+    setError(null);
+    try{
 const response= await axios.post(" http://localhost:3000/form",{
   formData:formData
-})
+},{
+  responseType:'blob',
+  
+});
+const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+  // 3. Create a temporary URL and trigger the download
+      const url = window.URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'resume.pdf'); // Set the download filename
+      document.body.appendChild(link);
+      link.click();
+
+}
+catch(error){
+  console.log(error)
+
+}
 console.log("send to backend")
 }
   return (
