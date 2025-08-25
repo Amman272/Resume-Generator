@@ -1,73 +1,33 @@
-# Welcome to your Lovable project
+# Resume Zenith 48
 
-## Project info
+A Vite + React app with a Node/Express backend that generates PDF resumes from a LaTeX template using Handlebars and the `tectonic` LaTeX engine.
 
-**URL**: https://lovable.dev/projects/06686fb4-8aef-4844-bf88-67ec33071df8
+## Tech Stack
 
-## How can I edit this code?
+- Frontend: React 18, Vite 5, Tailwind, shadcn/ui
+- Backend: Node.js, Express
+- PDF: Handlebars templates + `tectonic` CLI
+- Routing: react-router-dom
 
-There are several ways of editing your application.
+## Project Structure
 
-**Use Lovable**
+- `src/` — React app (UI, forms, pages)
+- `Backend/` — Express server and PDF generation logic
+  - [Backend/form.js](cci:7://file:///c:/Users/amman/Downloads/project%20two/resume-zenith-48/Backend/form.js:0:0-0:0) — endpoints `/form` and `/form/preview`, LaTeX compilation
+  - `Backend/template/` — LaTeX templates and output ([userLatex/](cci:1://file:///c:/Users/amman/Downloads/project%20two/resume-zenith-48/Backend/form.js:17:0-30:1))
+- `index.html`, `vite.config.js`, `tailwind.config.js`
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/06686fb4-8aef-4844-bf88-67ec33071df8) and start prompting.
+## Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js 18+
+- For local PDF generation: `tectonic` must be installed and available on PATH
+  - Linux (Debian/Ubuntu): `sudo apt-get install tectonic`
+  - macOS: `brew install tectonic`
+  - Windows: install from Tectonic releases or use WSL/Docker
 
-**Use your preferred IDE**
+## Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+# install deps
+npm install
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/06686fb4-8aef-4844-bf88-67ec33071df8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
