@@ -1,4 +1,4 @@
-# Resume Zenith 48
+# Resume Generator
 
 A Vite + React app with a Node/Express backend that generates PDF resumes from a LaTeX template using Handlebars and the `tectonic` LaTeX engine.
 
@@ -31,3 +31,26 @@ A Vite + React app with a Node/Express backend that generates PDF resumes from a
 # install deps
 npm install
 ```
+
+## Running Locally
+
+1.  **Start the Backend Server:**
+
+    ```bash
+    node Backend/index.js
+    ```
+
+    The backend server will be running on `http://localhost:3000`.
+
+2.  **Start the Frontend Development Server:**
+
+    ```bash
+    npm run dev
+    ```
+
+    The frontend development server will be running on `http://localhost:5173`.
+
+## Live Site
+
+This project is deployed as the **ATS Resume Builder**.
+
