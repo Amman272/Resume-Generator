@@ -1,5 +1,8 @@
 # Resume Generator
-A Vite + React app with a Node/Express backend that generates PDF resumes from a LaTeX template using Handlebars and the `tectonic` LaTeX engine.
+[A Vite + React app with a Node/Express backend that generates PDF resumes from a LaTeX template using Handlebars and the `tectonic` LaTeX engine.
+
+
+🔗 **Live Site**: [ATS Resume Builder]([https://your-live-site-url.com](https://resume-generator-tfp4.onrender.com/))
 
 ## Tech Stack
 
@@ -58,7 +61,7 @@ To run the application on your local machine, follow these steps:
 
 2.  **Start the Frontend Development Server**:
 
-    In a separate terminal, run this command:
+    In a separate terminal, run this command:](https://resume-generator-tfp4.onrender.com/)
 
     ```bash
     npm run dev
