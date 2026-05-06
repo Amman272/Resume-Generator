@@ -3,7 +3,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import path, { dirname, join } from "path";
 import Handlebars from "handlebars";
-
+import { exec } from "child_process";
 const router = Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -85,35 +85,90 @@ function insertData(name, data) {
  * @returns {string} 
  */
 function escapeLatex(text) {
-  if (typeof text !== 'string') {
+  if (typeof text !== "string") {
     return text;
   }
   return text
-    .replace(/\\/g, '\\textbackslash{}')
-    .replace(/&/g, '\\&')
-    .replace(/%/g, '\\%')
-    .replace(/\$/g, '\\$')
-    .replace(/#/g, '\\#')
-    .replace(/_/g, '\\_')
-    .replace(/{/g, '\\{')
-    .replace(/}/g, '\\}')
-    .replace(/~/g, '\\textasciitilde{}')
-    .replace(/\^/g, '\\textasciicircum{}');
+    .replace(/\\/g, "\\textbackslash{}")
+    .replace(/&/g, "\\&")
+    .replace(/%/g, "\\%")
+    .replace(/\$/g, "\\$")
+    .replace(/#/g, "\\#")
+    .replace(/_/g, "\\_")
+    .replace(/{/g, "\\{")
+    .replace(/}/g, "\\}")
+    .replace(/~/g, "\\textasciitilde{}")
+    .replace(/\^/g, "\\textasciicircum{}");
 }
 
+function expPDF(name) {
+  return new Promise((resolve, reject) => {
+    console.log("now in function");
+    const userLatexDir = path.join(__dirname, "template", "userLatex");
+    const texFilePath = path.join(userLatexDir, `${name}.tex`);
+    const pdfFilePath = path.join(userLatexDir, `${name}.pdf`);
+
+    // 2. CONSTRUCT THE COMMAND CORRECTLY
+    //    - Use template literals to inject variables.
+    //    - Provide both the output directory AND the input file.
+const command = `tectonic -X compile "${texFilePath}" --outdir "${userLatexDir}"`;
+    try {
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Compilation Error: ${stderr}`);
+          console.log("now in try block");
+          // 3. REJECT THE PROMISE ON FAILURE
+          reject(stderr);
+          return;
+        }
+        // 4. RESOLVE THE PROMISE ON SUCCESS
+            console.log("PDF compilation successful.");
+        resolve(pdfFilePath);
+
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
+
+function PDFsend(name,res){
+    const userLatexDir = path.join(__dirname, "template", "userLatex");
+    const texFilePath = path.join(userLatexDir, `${name}.tex`);
+    const pdfFilePath = path.join(userLatexDir, `${name}.pdf`);
+  res.sendFile(pdfFilePath,(err)=>{
+    if(err){
+      res.status(500).send('Error sending PDF file.');
+          console.log(err);
+    }
+
+  else{
+    console.log("pdf sent sucessfullly");
+       fs.unlink(pdfFilePath, () => {}); // Delete PDF
+             fs.unlink(path.join(__dirname, "template", "userLatex", `${name}.tex`), () => {});// deletes tex file
+   
+  }
+  })
+
+}
 router.post("/", async (req, res) => {
   const data = req.body.formData;
+const name = userLatex();
 
   for (const key in data) {
     data[key] = escapeLatex(data[key]);
   }
 
-  res.status(200).json({ message: "sent" });
+  //res.status(200).json({ message: "sent" });
 
   try {
-    const name = userLatex();
+    
     editLatex(name, data);
     insertData(name, data);
+   const pdfPath= await expPDF(name);
+   PDFsend(name,res);
+
   } catch (error) {
     console.log(error);
   }
