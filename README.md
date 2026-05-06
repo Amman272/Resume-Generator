@@ -2,7 +2,7 @@
 [A Vite + React app with a Node/Express backend that generates PDF resumes from a LaTeX template using Handlebars and the `tectonic` LaTeX engine.
 
 
-🔗 **Live Site**: [ATS Resume Builder]([https://your-live-site-url.com](https://resume-generator-tfp4.onrender.com/))
+🔗 **Live Site**: ATS Resume Builder [ATS Resume Builder](https://resume-generator-tfp4.onrender.com)
 
 ## Tech Stack
 
