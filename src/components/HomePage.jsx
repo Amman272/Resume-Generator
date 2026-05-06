@@ -55,7 +55,7 @@ const HomePage = () => {
             No design complexity, just clean formatting powered by LaTeX for perfect results every time.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+          <div className="flex flex-col gap-4 items-center pt-8">
             <Link to="/builder">
               <Button className="btn-primary text-lg px-12 py-6">
                 Try Now - It's Free
