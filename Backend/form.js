@@ -164,8 +164,8 @@ function PDFsendPreview(name,res){
 
   else{
     console.log("pdf sent sucessfullly");
-      //  fs.unlink(pdfFilePath, () => {}); // Delete PDF
-      //        fs.unlink(path.join(__dirname, "template", "userLatex", `${name}.tex`), () => {});// deletes tex file
+       fs.unlink(pdfFilePath, () => {}); // Delete PDF
+             fs.unlink(path.join(__dirname, "template", "userLatex", `${name}.tex`), () => {});// deletes tex file
    
   }
   })

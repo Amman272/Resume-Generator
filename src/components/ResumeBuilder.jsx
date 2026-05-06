@@ -20,13 +20,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Result } from "postcss";
 import axios from "axios";
 
 const ResumeBuilder = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [pdfUrl, setPdfUrl] = useState("");
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   console.log("ResumeBuilder component loading...");
   const [formData, setFormData] = useState({
     NAME: "John Doe",
@@ -276,8 +276,9 @@ const ResumeBuilder = () => {
 
     setError(null);
     try {
+      const API = import.meta.env.VITE_API_URL || "http://localhost:3000";
       const response = await axios.post(
-        "http://localhost:3000/form",
+        `${API}/form`,
         {
           formData: formData,
         },
@@ -309,9 +310,13 @@ const ResumeBuilder = () => {
   }
 
   async function preview() {
+    setIsPreviewLoading(true);
+    setError(null);
+
     try {
+      const API = import.meta.env.VITE_API_URL || "http://localhost:3000";
       const response = await axios.post(
-        "http://localhost:3000/form/preview",
+        `${API}/form/preview`,
         {
           formData: formData,
         },
@@ -319,13 +324,25 @@ const ResumeBuilder = () => {
           responseType: "blob",
         }
       );
-      console.log("now in preview section")
+
+      console.log("Preview generated successfully");
       const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+
+      // Clean up previous URL if it exists
+      if (pdfUrl) {
+        window.URL.revokeObjectURL(pdfUrl);
+      }
+
       const url = window.URL.createObjectURL(pdfBlob);
       setPdfUrl(url);
     } catch (error) {
-      console.log(error);
-      alert(error);
+      console.error("Error generating preview:", error);
+      setError(
+        "Failed to generate preview. Please ensure the backend server is running."
+      );
+      setPdfUrl(""); // Clear any existing preview
+    } finally {
+      setIsPreviewLoading(false);
     }
   }
   return (
@@ -366,10 +383,18 @@ const ResumeBuilder = () => {
                 
                <span onClick={sendBack}>send to backend </span>
               </Button> */}
-              <Button variant="outline" className="flex items-center space-x-2">
-                <Eye className="h-4 w-4" />
-
-                <span onClick={preview}>Preview</span>
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2"
+                onClick={preview}
+                disabled={isPreviewLoading}
+              >
+                {isPreviewLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+                <span>{isPreviewLoading ? "Generating..." : "Preview"}</span>
               </Button>
               <Button
                 onClick={sendBack}
@@ -1629,22 +1654,45 @@ const ResumeBuilder = () => {
                   Live Preview
                 </h2>
               </div>
-              <div className="bg-muted/30 rounded-lg p-8 min-h-[600px] flex items-center justify-center border-2 border-dashed border-muted">
-              {pdfUrl ?(
-              <iframe src="{pdfUrl}" title="resume-preview"></iframe>):(
-              <div>preview appears here</div>)}
-                <div className="text-center text-muted-foreground">
-                  <div className="bg-gradient-to-r from-muted-foreground to-muted-foreground p-4 rounded-xl inline-block mb-4 opacity-50">
-                    <FileText className="h-12 w-12 text-primary-foreground" />
+              <div className="bg-muted/30 rounded-lg p-4 min-h-[600px] flex items-center justify-center border-2 border-dashed border-muted">
+                {isPreviewLoading ? (
+                  <div className="text-center text-muted-foreground">
+                    <Loader2 className="h-12 w-12 animate-spin mx-auto mb-4" />
+                    <p className="text-lg font-medium mb-2">
+                      Generating Preview...
+                    </p>
+                    <p className="text-sm max-w-xs mx-auto">
+                      Please wait while we create your resume preview
+                    </p>
                   </div>
-                  <p className="text-lg font-medium mb-2">
-                    Preview Coming Soon
-                  </p>
-                  <p className="text-sm max-w-xs mx-auto">
-                    Fill out the form to see your beautifully formatted resume
-                    preview
-                  </p>
-                </div>
+                ) : error ? (
+                  <div className="text-center text-red-500">
+                    <div className="bg-red-100 p-4 rounded-xl inline-block mb-4">
+                      <FileText className="h-12 w-12 text-red-500" />
+                    </div>
+                    <p className="text-lg font-medium mb-2">Preview Error</p>
+                    <p className="text-sm max-w-xs mx-auto">{error}</p>
+                  </div>
+                ) : pdfUrl ? (
+                  <iframe
+                    src={pdfUrl}
+                    title="resume-preview"
+                    className="w-full h-[580px] border-0 rounded"
+                  />
+                ) : (
+                  <div className="text-center text-muted-foreground">
+                    <div className="bg-gradient-to-r from-muted-foreground to-muted-foreground p-4 rounded-xl inline-block mb-4 opacity-50">
+                      <FileText className="h-12 w-12 text-primary-foreground" />
+                    </div>
+                    <p className="text-lg font-medium mb-2">
+                      Click Preview to see your resume
+                    </p>
+                    <p className="text-sm max-w-xs mx-auto">
+                      Fill out the form and click the Preview button to see your
+                      beautifully formatted resume
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
