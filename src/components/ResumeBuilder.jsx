@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Result } from 'postcss';
+import axios from 'axios';
 
 const ResumeBuilder = () => {
   const [formData, setFormData] = useState({
@@ -199,6 +201,15 @@ const ResumeBuilder = () => {
     alert('Resume generation will be implemented with backend integration!');
   };
 
+  function showData(){
+    console.log('Form Data:', formData);
+  }
+async function sendBack(){
+const Result= await axios.post(" http://localhost:3000/form",{
+  formData:formData
+})
+console.log("send to backend")
+}
   return (
     <div className="min-h-screen gradient-bg">
       {/* Header */}
@@ -225,7 +236,13 @@ const ResumeBuilder = () => {
               </Button>
               <Button variant="outline" className="flex items-center space-x-2">
                 <Eye className="h-4 w-4" />
-                <span>Preview</span>
+                
+                <span onClick={sendBack}>send to backend </span>
+              </Button>
+              <Button variant="outline" className="flex items-center space-x-2">
+                <Eye className="h-4 w-4" />
+                
+                <span onClick={showData}>Preview</span>
               </Button>
               <Button onClick={generateResume} className="flex items-center space-x-2">
                 <Download className="h-4 w-4" />
