@@ -23,135 +23,122 @@ const ResumeBuilder = () => {
     degree: '',
     educationLocation: '',
     
-    // Experience (dynamic array)
-    experiences: [{
-      id: Date.now(),
-      companyName: '',
-      experienceLocation: '',
-      role: '',
-      startDate: '',
-      endDate: '',
-      experiencePoints: ['', '', '']
-    }],
+    // Experience (3 hardcoded experiences)
+    companyName_1: '',
+    experienceLocation_1: '',
+    role_1: '',
+    startDate_1: '',
+    endDate_1: '',
+    experiencePoint1_1: '',
+    experiencePoint2_1: '',
+    experiencePoint3_1: '',
     
-    // Projects (dynamic array)
-    projects: [{
-      id: Date.now() + 1,
-      projectName: '',
-      technologies: '',
-      projectDate: '',
-      projectPoints: ['', '', '']
-    }],
+    companyName_2: '',
+    experienceLocation_2: '',
+    role_2: '',
+    startDate_2: '',
+    endDate_2: '',
+    experiencePoint1_2: '',
+    experiencePoint2_2: '',
+    experiencePoint3_2: '',
+    
+    companyName_3: '',
+    experienceLocation_3: '',
+    role_3: '',
+    startDate_3: '',
+    endDate_3: '',
+    experiencePoint1_3: '',
+    experiencePoint2_3: '',
+    experiencePoint3_3: '',
+    
+    // Projects (3 hardcoded projects)
+    projectName_1: '',
+    technologies_1: '',
+    projectDate_1: '',
+    projectPoint1_1: '',
+    projectPoint2_1: '',
+    projectPoint3_1: '',
+    
+    projectName_2: '',
+    technologies_2: '',
+    projectDate_2: '',
+    projectPoint1_2: '',
+    projectPoint2_2: '',
+    projectPoint3_2: '',
+    
+    projectName_3: '',
+    technologies_3: '',
+    projectDate_3: '',
+    projectPoint1_3: '',
+    projectPoint2_3: '',
+    projectPoint3_3: '',
     
     // Technical Skills (3 fields)
     languages: '',
     developerTools: '',
     technologiesFrameworks: '',
     
-    // Achievements (8 fields)
-    organizationName: '',
-    achievementStartDate: '',
-    achievementEndDate: '',
-    achievementRole: '',
-    achievementLocation: '',
-    achievementPoint1: '',
-    achievementPoint2: '',
-    achievementPoint3: ''
+    // Achievements (3 hardcoded achievements, 1 point each)
+    organizationName_1: '',
+    achievementStartDate_1: '',
+    achievementEndDate_1: '',
+    achievementRole_1: '',
+    achievementLocation_1: '',
+    achievementPoint_1: '',
+    
+    organizationName_2: '',
+    achievementStartDate_2: '',
+    achievementEndDate_2: '',
+    achievementRole_2: '',
+    achievementLocation_2: '',
+    achievementPoint_2: '',
+    
+    organizationName_3: '',
+    achievementStartDate_3: '',
+    achievementEndDate_3: '',
+    achievementRole_3: '',
+    achievementLocation_3: '',
+    achievementPoint_3: ''
+  });
+
+  // Visibility state for sections
+  const [visibleSections, setVisibleSections] = useState({
+    experience_1: true,
+    experience_2: false,
+    experience_3: false,
+    project_1: true,
+    project_2: false,
+    project_3: false,
+    achievement_1: true,
+    achievement_2: false,
+    achievement_3: false
   });
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const updateExperience = (expId, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      experiences: prev.experiences.map(exp =>
-        exp.id === expId ? { ...exp, [field]: value } : exp
-      )
-    }));
-  };
-
-  const updateExperiencePoint = (expId, pointIndex, value) => {
-    setFormData(prev => ({
-      ...prev,
-      experiences: prev.experiences.map(exp =>
-        exp.id === expId ? {
-          ...exp,
-          experiencePoints: exp.experiencePoints.map((point, idx) =>
-            idx === pointIndex ? value : point
-          )
-        } : exp
-      )
-    }));
-  };
-
   const addExperience = () => {
-    setFormData(prev => ({
-      ...prev,
-      experiences: [...prev.experiences, {
-        id: Date.now(),
-        companyName: '',
-        experienceLocation: '',
-        role: '',
-        startDate: '',
-        endDate: '',
-        experiencePoints: ['', '', '']
-      }]
-    }));
-  };
-
-  const removeExperience = (expId) => {
-    if (formData.experiences.length > 1) {
-      setFormData(prev => ({
-        ...prev,
-        experiences: prev.experiences.filter(exp => exp.id !== expId)
-      }));
+    if (!visibleSections.experience_2) {
+      setVisibleSections(prev => ({ ...prev, experience_2: true }));
+    } else if (!visibleSections.experience_3) {
+      setVisibleSections(prev => ({ ...prev, experience_3: true }));
     }
   };
 
-  const updateProject = (projId, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      projects: prev.projects.map(proj =>
-        proj.id === projId ? { ...proj, [field]: value } : proj
-      )
-    }));
-  };
-
-  const updateProjectPoint = (projId, pointIndex, value) => {
-    setFormData(prev => ({
-      ...prev,
-      projects: prev.projects.map(proj =>
-        proj.id === projId ? {
-          ...proj,
-          projectPoints: proj.projectPoints.map((point, idx) =>
-            idx === pointIndex ? value : point
-          )
-        } : proj
-      )
-    }));
-  };
-
   const addProject = () => {
-    setFormData(prev => ({
-      ...prev,
-      projects: [...prev.projects, {
-        id: Date.now(),
-        projectName: '',
-        technologies: '',
-        projectDate: '',
-        projectPoints: ['', '', '']
-      }]
-    }));
+    if (!visibleSections.project_2) {
+      setVisibleSections(prev => ({ ...prev, project_2: true }));
+    } else if (!visibleSections.project_3) {
+      setVisibleSections(prev => ({ ...prev, project_3: true }));
+    }
   };
 
-  const removeProject = (projId) => {
-    if (formData.projects.length > 1) {
-      setFormData(prev => ({
-        ...prev,
-        projects: prev.projects.filter(proj => proj.id !== projId)
-      }));
+  const addAchievement = () => {
+    if (!visibleSections.achievement_2) {
+      setVisibleSections(prev => ({ ...prev, achievement_2: true }));
+    } else if (!visibleSections.achievement_3) {
+      setVisibleSections(prev => ({ ...prev, achievement_3: true }));
     }
   };
 
@@ -166,33 +153,80 @@ const ResumeBuilder = () => {
       dates: '',
       degree: '',
       educationLocation: '',
-      experiences: [{
-        id: Date.now(),
-        companyName: '',
-        experienceLocation: '',
-        role: '',
-        startDate: '',
-        endDate: '',
-        experiencePoints: ['', '', '']
-      }],
-      projects: [{
-        id: Date.now() + 1,
-        projectName: '',
-        technologies: '',
-        projectDate: '',
-        projectPoints: ['', '', '']
-      }],
+      companyName_1: '',
+      experienceLocation_1: '',
+      role_1: '',
+      startDate_1: '',
+      endDate_1: '',
+      experiencePoint1_1: '',
+      experiencePoint2_1: '',
+      experiencePoint3_1: '',
+      companyName_2: '',
+      experienceLocation_2: '',
+      role_2: '',
+      startDate_2: '',
+      endDate_2: '',
+      experiencePoint1_2: '',
+      experiencePoint2_2: '',
+      experiencePoint3_2: '',
+      companyName_3: '',
+      experienceLocation_3: '',
+      role_3: '',
+      startDate_3: '',
+      endDate_3: '',
+      experiencePoint1_3: '',
+      experiencePoint2_3: '',
+      experiencePoint3_3: '',
+      projectName_1: '',
+      technologies_1: '',
+      projectDate_1: '',
+      projectPoint1_1: '',
+      projectPoint2_1: '',
+      projectPoint3_1: '',
+      projectName_2: '',
+      technologies_2: '',
+      projectDate_2: '',
+      projectPoint1_2: '',
+      projectPoint2_2: '',
+      projectPoint3_2: '',
+      projectName_3: '',
+      technologies_3: '',
+      projectDate_3: '',
+      projectPoint1_3: '',
+      projectPoint2_3: '',
+      projectPoint3_3: '',
       languages: '',
       developerTools: '',
       technologiesFrameworks: '',
-      organizationName: '',
-      achievementStartDate: '',
-      achievementEndDate: '',
-      achievementRole: '',
-      achievementLocation: '',
-      achievementPoint1: '',
-      achievementPoint2: '',
-      achievementPoint3: ''
+      organizationName_1: '',
+      achievementStartDate_1: '',
+      achievementEndDate_1: '',
+      achievementRole_1: '',
+      achievementLocation_1: '',
+      achievementPoint_1: '',
+      organizationName_2: '',
+      achievementStartDate_2: '',
+      achievementEndDate_2: '',
+      achievementRole_2: '',
+      achievementLocation_2: '',
+      achievementPoint_2: '',
+      organizationName_3: '',
+      achievementStartDate_3: '',
+      achievementEndDate_3: '',
+      achievementRole_3: '',
+      achievementLocation_3: '',
+      achievementPoint_3: ''
+    });
+    setVisibleSections({
+      experience_1: true,
+      experience_2: false,
+      experience_3: false,
+      project_1: true,
+      project_2: false,
+      project_3: false,
+      achievement_1: true,
+      achievement_2: false,
+      achievement_3: false
     });
   };
 
@@ -393,92 +427,281 @@ console.log("send to backend")
               </div>
               
               <div className="space-y-6">
-                {formData.experiences.map((experience, index) => (
-                  <div key={experience.id} className="border border-border rounded-lg p-4 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-medium text-foreground">Experience {index + 1}</h3>
-                      {formData.experiences.length > 1 && (
-                        <Button
-                          onClick={() => removeExperience(experience.id)}
-                          variant="ghost"
-                          size="sm"
-                          className="text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
+                {/* Experience 1 */}
+                {visibleSections.experience_1 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Experience 1</h3>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor={`companyName-${experience.id}`}>Company Name</Label>
+                        <Label htmlFor="companyName_1">Company Name</Label>
                         <Input
-                          id={`companyName-${experience.id}`}
-                          value={experience.companyName}
-                          onChange={(e) => updateExperience(experience.id, 'companyName', e.target.value)}
+                          id="companyName_1"
+                          value={formData.companyName_1}
+                          onChange={(e) => handleInputChange('companyName_1', e.target.value)}
                           placeholder="Tech Company Inc."
                         />
                       </div>
                       <div>
-                        <Label htmlFor={`experienceLocation-${experience.id}`}>Location</Label>
+                        <Label htmlFor="experienceLocation_1">Location</Label>
                         <Input
-                          id={`experienceLocation-${experience.id}`}
-                          value={experience.experienceLocation}
-                          onChange={(e) => updateExperience(experience.id, 'experienceLocation', e.target.value)}
+                          id="experienceLocation_1"
+                          value={formData.experienceLocation_1}
+                          onChange={(e) => handleInputChange('experienceLocation_1', e.target.value)}
                           placeholder="San Francisco, CA"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <Label htmlFor={`role-${experience.id}`}>Role</Label>
+                      <Label htmlFor="role_1">Role</Label>
                       <Input
-                        id={`role-${experience.id}`}
-                        value={experience.role}
-                        onChange={(e) => updateExperience(experience.id, 'role', e.target.value)}
+                        id="role_1"
+                        value={formData.role_1}
+                        onChange={(e) => handleInputChange('role_1', e.target.value)}
                         placeholder="Software Engineer"
                       />
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor={`startDate-${experience.id}`}>Start Date</Label>
+                        <Label htmlFor="startDate_1">Start Date</Label>
                         <Input
-                          id={`startDate-${experience.id}`}
-                          value={experience.startDate}
-                          onChange={(e) => updateExperience(experience.id, 'startDate', e.target.value)}
+                          id="startDate_1"
+                          value={formData.startDate_1}
+                          onChange={(e) => handleInputChange('startDate_1', e.target.value)}
                           placeholder="January 2022"
                         />
                       </div>
                       <div>
-                        <Label htmlFor={`endDate-${experience.id}`}>End Date</Label>
+                        <Label htmlFor="endDate_1">End Date</Label>
                         <Input
-                          id={`endDate-${experience.id}`}
-                          value={experience.endDate}
-                          onChange={(e) => updateExperience(experience.id, 'endDate', e.target.value)}
+                          id="endDate_1"
+                          value={formData.endDate_1}
+                          onChange={(e) => handleInputChange('endDate_1', e.target.value)}
                           placeholder="Present"
                         />
                       </div>
                     </div>
                     
                     <div className="space-y-3">
-                      {experience.experiencePoints.map((point, pointIndex) => (
-                        <div key={pointIndex}>
-                          <Label htmlFor={`experiencePoint${pointIndex}-${experience.id}`}>
-                            Experience Point {pointIndex + 1}
-                          </Label>
-                          <Textarea
-                            id={`experiencePoint${pointIndex}-${experience.id}`}
-                            value={point}
-                            onChange={(e) => updateExperiencePoint(experience.id, pointIndex, e.target.value)}
-                            placeholder={`Experience point ${pointIndex + 1}...`}
-                            rows={2}
-                          />
-                        </div>
-                      ))}
+                      <div>
+                        <Label htmlFor="experiencePoint1_1">Experience Point 1</Label>
+                        <Textarea
+                          id="experiencePoint1_1"
+                          value={formData.experiencePoint1_1}
+                          onChange={(e) => handleInputChange('experiencePoint1_1', e.target.value)}
+                          placeholder="Experience point 1..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experiencePoint2_1">Experience Point 2</Label>
+                        <Textarea
+                          id="experiencePoint2_1"
+                          value={formData.experiencePoint2_1}
+                          onChange={(e) => handleInputChange('experiencePoint2_1', e.target.value)}
+                          placeholder="Experience point 2..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experiencePoint3_1">Experience Point 3</Label>
+                        <Textarea
+                          id="experiencePoint3_1"
+                          value={formData.experiencePoint3_1}
+                          onChange={(e) => handleInputChange('experiencePoint3_1', e.target.value)}
+                          placeholder="Experience point 3..."
+                          rows={2}
+                        />
+                      </div>
                     </div>
                   </div>
-                ))}
+                )}
+
+                {/* Experience 2 */}
+                {visibleSections.experience_2 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Experience 2</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="companyName_2">Company Name</Label>
+                        <Input
+                          id="companyName_2"
+                          value={formData.companyName_2}
+                          onChange={(e) => handleInputChange('companyName_2', e.target.value)}
+                          placeholder="Tech Company Inc."
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experienceLocation_2">Location</Label>
+                        <Input
+                          id="experienceLocation_2"
+                          value={formData.experienceLocation_2}
+                          onChange={(e) => handleInputChange('experienceLocation_2', e.target.value)}
+                          placeholder="San Francisco, CA"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="role_2">Role</Label>
+                      <Input
+                        id="role_2"
+                        value={formData.role_2}
+                        onChange={(e) => handleInputChange('role_2', e.target.value)}
+                        placeholder="Software Engineer"
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="startDate_2">Start Date</Label>
+                        <Input
+                          id="startDate_2"
+                          value={formData.startDate_2}
+                          onChange={(e) => handleInputChange('startDate_2', e.target.value)}
+                          placeholder="January 2022"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="endDate_2">End Date</Label>
+                        <Input
+                          id="endDate_2"
+                          value={formData.endDate_2}
+                          onChange={(e) => handleInputChange('endDate_2', e.target.value)}
+                          placeholder="Present"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="experiencePoint1_2">Experience Point 1</Label>
+                        <Textarea
+                          id="experiencePoint1_2"
+                          value={formData.experiencePoint1_2}
+                          onChange={(e) => handleInputChange('experiencePoint1_2', e.target.value)}
+                          placeholder="Experience point 1..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experiencePoint2_2">Experience Point 2</Label>
+                        <Textarea
+                          id="experiencePoint2_2"
+                          value={formData.experiencePoint2_2}
+                          onChange={(e) => handleInputChange('experiencePoint2_2', e.target.value)}
+                          placeholder="Experience point 2..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experiencePoint3_2">Experience Point 3</Label>
+                        <Textarea
+                          id="experiencePoint3_2"
+                          value={formData.experiencePoint3_2}
+                          onChange={(e) => handleInputChange('experiencePoint3_2', e.target.value)}
+                          placeholder="Experience point 3..."
+                          rows={2}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Experience 3 */}
+                {visibleSections.experience_3 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Experience 3</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="companyName_3">Company Name</Label>
+                        <Input
+                          id="companyName_3"
+                          value={formData.companyName_3}
+                          onChange={(e) => handleInputChange('companyName_3', e.target.value)}
+                          placeholder="Tech Company Inc."
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experienceLocation_3">Location</Label>
+                        <Input
+                          id="experienceLocation_3"
+                          value={formData.experienceLocation_3}
+                          onChange={(e) => handleInputChange('experienceLocation_3', e.target.value)}
+                          placeholder="San Francisco, CA"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="role_3">Role</Label>
+                      <Input
+                        id="role_3"
+                        value={formData.role_3}
+                        onChange={(e) => handleInputChange('role_3', e.target.value)}
+                        placeholder="Software Engineer"
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="startDate_3">Start Date</Label>
+                        <Input
+                          id="startDate_3"
+                          value={formData.startDate_3}
+                          onChange={(e) => handleInputChange('startDate_3', e.target.value)}
+                          placeholder="January 2022"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="endDate_3">End Date</Label>
+                        <Input
+                          id="endDate_3"
+                          value={formData.endDate_3}
+                          onChange={(e) => handleInputChange('endDate_3', e.target.value)}
+                          placeholder="Present"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="experiencePoint1_3">Experience Point 1</Label>
+                        <Textarea
+                          id="experiencePoint1_3"
+                          value={formData.experiencePoint1_3}
+                          onChange={(e) => handleInputChange('experiencePoint1_3', e.target.value)}
+                          placeholder="Experience point 1..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experiencePoint2_3">Experience Point 2</Label>
+                        <Textarea
+                          id="experiencePoint2_3"
+                          value={formData.experiencePoint2_3}
+                          onChange={(e) => handleInputChange('experiencePoint2_3', e.target.value)}
+                          placeholder="Experience point 2..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="experiencePoint3_3">Experience Point 3</Label>
+                        <Textarea
+                          id="experiencePoint3_3"
+                          value={formData.experiencePoint3_3}
+                          onChange={(e) => handleInputChange('experiencePoint3_3', e.target.value)}
+                          placeholder="Experience point 3..."
+                          rows={2}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -503,71 +726,218 @@ console.log("send to backend")
               </div>
               
               <div className="space-y-6">
-                {formData.projects.map((project, index) => (
-                  <div key={project.id} className="border border-border rounded-lg p-4 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-medium text-foreground">Project {index + 1}</h3>
-                      {formData.projects.length > 1 && (
-                        <Button
-                          onClick={() => removeProject(project.id)}
-                          variant="ghost"
-                          size="sm"
-                          className="text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
+                {/* Project 1 */}
+                {visibleSections.project_1 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Project 1</h3>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor={`projectName-${project.id}`}>Project Name</Label>
+                        <Label htmlFor="projectName_1">Project Name</Label>
                         <Input
-                          id={`projectName-${project.id}`}
-                          value={project.projectName}
-                          onChange={(e) => updateProject(project.id, 'projectName', e.target.value)}
+                          id="projectName_1"
+                          value={formData.projectName_1}
+                          onChange={(e) => handleInputChange('projectName_1', e.target.value)}
                           placeholder="E-commerce Platform"
                         />
                       </div>
                       <div>
-                        <Label htmlFor={`projectDate-${project.id}`}>Project Date</Label>
+                        <Label htmlFor="projectDate_1">Project Date</Label>
                         <Input
-                          id={`projectDate-${project.id}`}
-                          value={project.projectDate}
-                          onChange={(e) => updateProject(project.id, 'projectDate', e.target.value)}
+                          id="projectDate_1"
+                          value={formData.projectDate_1}
+                          onChange={(e) => handleInputChange('projectDate_1', e.target.value)}
                           placeholder="March 2023"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <Label htmlFor={`technologies-${project.id}`}>Technologies</Label>
+                      <Label htmlFor="technologies_1">Technologies</Label>
                       <Input
-                        id={`technologies-${project.id}`}
-                        value={project.technologies}
-                        onChange={(e) => updateProject(project.id, 'technologies', e.target.value)}
+                        id="technologies_1"
+                        value={formData.technologies_1}
+                        onChange={(e) => handleInputChange('technologies_1', e.target.value)}
                         placeholder="React, Node.js, MongoDB"
                       />
                     </div>
                     
                     <div className="space-y-3">
-                      {project.projectPoints.map((point, pointIndex) => (
-                        <div key={pointIndex}>
-                          <Label htmlFor={`projectPoint${pointIndex}-${project.id}`}>
-                            Project Point {pointIndex + 1}
-                          </Label>
-                          <Textarea
-                            id={`projectPoint${pointIndex}-${project.id}`}
-                            value={point}
-                            onChange={(e) => updateProjectPoint(project.id, pointIndex, e.target.value)}
-                            placeholder={`Project point ${pointIndex + 1}...`}
-                            rows={2}
-                          />
-                        </div>
-                      ))}
+                      <div>
+                        <Label htmlFor="projectPoint1_1">Project Point 1</Label>
+                        <Textarea
+                          id="projectPoint1_1"
+                          value={formData.projectPoint1_1}
+                          onChange={(e) => handleInputChange('projectPoint1_1', e.target.value)}
+                          placeholder="Project point 1..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectPoint2_1">Project Point 2</Label>
+                        <Textarea
+                          id="projectPoint2_1"
+                          value={formData.projectPoint2_1}
+                          onChange={(e) => handleInputChange('projectPoint2_1', e.target.value)}
+                          placeholder="Project point 2..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectPoint3_1">Project Point 3</Label>
+                        <Textarea
+                          id="projectPoint3_1"
+                          value={formData.projectPoint3_1}
+                          onChange={(e) => handleInputChange('projectPoint3_1', e.target.value)}
+                          placeholder="Project point 3..."
+                          rows={2}
+                        />
+                      </div>
                     </div>
                   </div>
-                ))}
+                )}
+
+                {/* Project 2 */}
+                {visibleSections.project_2 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Project 2</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="projectName_2">Project Name</Label>
+                        <Input
+                          id="projectName_2"
+                          value={formData.projectName_2}
+                          onChange={(e) => handleInputChange('projectName_2', e.target.value)}
+                          placeholder="E-commerce Platform"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectDate_2">Project Date</Label>
+                        <Input
+                          id="projectDate_2"
+                          value={formData.projectDate_2}
+                          onChange={(e) => handleInputChange('projectDate_2', e.target.value)}
+                          placeholder="March 2023"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="technologies_2">Technologies</Label>
+                      <Input
+                        id="technologies_2"
+                        value={formData.technologies_2}
+                        onChange={(e) => handleInputChange('technologies_2', e.target.value)}
+                        placeholder="React, Node.js, MongoDB"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="projectPoint1_2">Project Point 1</Label>
+                        <Textarea
+                          id="projectPoint1_2"
+                          value={formData.projectPoint1_2}
+                          onChange={(e) => handleInputChange('projectPoint1_2', e.target.value)}
+                          placeholder="Project point 1..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectPoint2_2">Project Point 2</Label>
+                        <Textarea
+                          id="projectPoint2_2"
+                          value={formData.projectPoint2_2}
+                          onChange={(e) => handleInputChange('projectPoint2_2', e.target.value)}
+                          placeholder="Project point 2..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectPoint3_2">Project Point 3</Label>
+                        <Textarea
+                          id="projectPoint3_2"
+                          value={formData.projectPoint3_2}
+                          onChange={(e) => handleInputChange('projectPoint3_2', e.target.value)}
+                          placeholder="Project point 3..."
+                          rows={2}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Project 3 */}
+                {visibleSections.project_3 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Project 3</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="projectName_3">Project Name</Label>
+                        <Input
+                          id="projectName_3"
+                          value={formData.projectName_3}
+                          onChange={(e) => handleInputChange('projectName_3', e.target.value)}
+                          placeholder="E-commerce Platform"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectDate_3">Project Date</Label>
+                        <Input
+                          id="projectDate_3"
+                          value={formData.projectDate_3}
+                          onChange={(e) => handleInputChange('projectDate_3', e.target.value)}
+                          placeholder="March 2023"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="technologies_3">Technologies</Label>
+                      <Input
+                        id="technologies_3"
+                        value={formData.technologies_3}
+                        onChange={(e) => handleInputChange('technologies_3', e.target.value)}
+                        placeholder="React, Node.js, MongoDB"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="projectPoint1_3">Project Point 1</Label>
+                        <Textarea
+                          id="projectPoint1_3"
+                          value={formData.projectPoint1_3}
+                          onChange={(e) => handleInputChange('projectPoint1_3', e.target.value)}
+                          placeholder="Project point 1..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectPoint2_3">Project Point 2</Label>
+                        <Textarea
+                          id="projectPoint2_3"
+                          value={formData.projectPoint2_3}
+                          onChange={(e) => handleInputChange('projectPoint2_3', e.target.value)}
+                          placeholder="Project point 2..."
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="projectPoint3_3">Project Point 3</Label>
+                        <Textarea
+                          id="projectPoint3_3"
+                          value={formData.projectPoint3_3}
+                          onChange={(e) => handleInputChange('projectPoint3_3', e.target.value)}
+                          placeholder="Project point 3..."
+                          rows={2}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -612,94 +982,234 @@ console.log("send to backend")
 
             {/* Achievements */}
             <div className="card p-6">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
-                  <Award className="h-5 w-5 text-primary-foreground" />
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                    <Award className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <h2 className="text-xl font-semibold text-card-foreground">Achievements</h2>
                 </div>
-                <h2 className="text-xl font-semibold text-card-foreground">Achievements</h2>
+                <Button 
+                  onClick={addAchievement}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span>Add Achievement</span>
+                </Button>
               </div>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="organizationName">Organization Name</Label>
-                    <Input
-                      id="organizationName"
-                      value={formData.organizationName}
-                      onChange={(e) => handleInputChange('organizationName', e.target.value)}
-                      placeholder="Tech Innovation Society"
-                    />
+              
+              <div className="space-y-6">
+                {/* Achievement 1 */}
+                {visibleSections.achievement_1 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Achievement 1</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="organizationName_1">Organization Name</Label>
+                        <Input
+                          id="organizationName_1"
+                          value={formData.organizationName_1}
+                          onChange={(e) => handleInputChange('organizationName_1', e.target.value)}
+                          placeholder="Tech Innovation Society"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="achievementRole_1">Role</Label>
+                        <Input
+                          id="achievementRole_1"
+                          value={formData.achievementRole_1}
+                          onChange={(e) => handleInputChange('achievementRole_1', e.target.value)}
+                          placeholder="President"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="achievementStartDate_1">Start Date</Label>
+                        <Input
+                          id="achievementStartDate_1"
+                          value={formData.achievementStartDate_1}
+                          onChange={(e) => handleInputChange('achievementStartDate_1', e.target.value)}
+                          placeholder="January 2021"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="achievementEndDate_1">End Date</Label>
+                        <Input
+                          id="achievementEndDate_1"
+                          value={formData.achievementEndDate_1}
+                          onChange={(e) => handleInputChange('achievementEndDate_1', e.target.value)}
+                          placeholder="December 2021"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="achievementLocation_1">Location</Label>
+                      <Input
+                        id="achievementLocation_1"
+                        value={formData.achievementLocation_1}
+                        onChange={(e) => handleInputChange('achievementLocation_1', e.target.value)}
+                        placeholder="University Campus"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="achievementPoint_1">Achievement Point</Label>
+                      <Textarea
+                        id="achievementPoint_1"
+                        value={formData.achievementPoint_1}
+                        onChange={(e) => handleInputChange('achievementPoint_1', e.target.value)}
+                        placeholder="Led a team of 20 members in organizing tech events..."
+                        rows={2}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <Label htmlFor="achievementRole">Role</Label>
-                    <Input
-                      id="achievementRole"
-                      value={formData.achievementRole}
-                      onChange={(e) => handleInputChange('achievementRole', e.target.value)}
-                      placeholder="President"
-                    />
+                )}
+
+                {/* Achievement 2 */}
+                {visibleSections.achievement_2 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Achievement 2</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="organizationName_2">Organization Name</Label>
+                        <Input
+                          id="organizationName_2"
+                          value={formData.organizationName_2}
+                          onChange={(e) => handleInputChange('organizationName_2', e.target.value)}
+                          placeholder="Tech Innovation Society"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="achievementRole_2">Role</Label>
+                        <Input
+                          id="achievementRole_2"
+                          value={formData.achievementRole_2}
+                          onChange={(e) => handleInputChange('achievementRole_2', e.target.value)}
+                          placeholder="President"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="achievementStartDate_2">Start Date</Label>
+                        <Input
+                          id="achievementStartDate_2"
+                          value={formData.achievementStartDate_2}
+                          onChange={(e) => handleInputChange('achievementStartDate_2', e.target.value)}
+                          placeholder="January 2021"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="achievementEndDate_2">End Date</Label>
+                        <Input
+                          id="achievementEndDate_2"
+                          value={formData.achievementEndDate_2}
+                          onChange={(e) => handleInputChange('achievementEndDate_2', e.target.value)}
+                          placeholder="December 2021"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="achievementLocation_2">Location</Label>
+                      <Input
+                        id="achievementLocation_2"
+                        value={formData.achievementLocation_2}
+                        onChange={(e) => handleInputChange('achievementLocation_2', e.target.value)}
+                        placeholder="University Campus"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="achievementPoint_2">Achievement Point</Label>
+                      <Textarea
+                        id="achievementPoint_2"
+                        value={formData.achievementPoint_2}
+                        onChange={(e) => handleInputChange('achievementPoint_2', e.target.value)}
+                        placeholder="Increased membership by 150% during tenure..."
+                        rows={2}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="achievementStartDate">Start Date</Label>
-                    <Input
-                      id="achievementStartDate"
-                      value={formData.achievementStartDate}
-                      onChange={(e) => handleInputChange('achievementStartDate', e.target.value)}
-                      placeholder="January 2021"
-                    />
+                )}
+
+                {/* Achievement 3 */}
+                {visibleSections.achievement_3 && (
+                  <div className="border border-border rounded-lg p-4 space-y-4">
+                    <h3 className="text-lg font-medium text-foreground">Achievement 3</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="organizationName_3">Organization Name</Label>
+                        <Input
+                          id="organizationName_3"
+                          value={formData.organizationName_3}
+                          onChange={(e) => handleInputChange('organizationName_3', e.target.value)}
+                          placeholder="Tech Innovation Society"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="achievementRole_3">Role</Label>
+                        <Input
+                          id="achievementRole_3"
+                          value={formData.achievementRole_3}
+                          onChange={(e) => handleInputChange('achievementRole_3', e.target.value)}
+                          placeholder="President"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="achievementStartDate_3">Start Date</Label>
+                        <Input
+                          id="achievementStartDate_3"
+                          value={formData.achievementStartDate_3}
+                          onChange={(e) => handleInputChange('achievementStartDate_3', e.target.value)}
+                          placeholder="January 2021"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="achievementEndDate_3">End Date</Label>
+                        <Input
+                          id="achievementEndDate_3"
+                          value={formData.achievementEndDate_3}
+                          onChange={(e) => handleInputChange('achievementEndDate_3', e.target.value)}
+                          placeholder="December 2021"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="achievementLocation_3">Location</Label>
+                      <Input
+                        id="achievementLocation_3"
+                        value={formData.achievementLocation_3}
+                        onChange={(e) => handleInputChange('achievementLocation_3', e.target.value)}
+                        placeholder="University Campus"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="achievementPoint_3">Achievement Point</Label>
+                      <Textarea
+                        id="achievementPoint_3"
+                        value={formData.achievementPoint_3}
+                        onChange={(e) => handleInputChange('achievementPoint_3', e.target.value)}
+                        placeholder="Secured $10,000 in sponsorships for annual tech conference..."
+                        rows={2}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <Label htmlFor="achievementEndDate">End Date</Label>
-                    <Input
-                      id="achievementEndDate"
-                      value={formData.achievementEndDate}
-                      onChange={(e) => handleInputChange('achievementEndDate', e.target.value)}
-                      placeholder="December 2021"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor="achievementLocation">Location</Label>
-                  <Input
-                    id="achievementLocation"
-                    value={formData.achievementLocation}
-                    onChange={(e) => handleInputChange('achievementLocation', e.target.value)}
-                    placeholder="University Campus"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <Label htmlFor="achievementPoint1">Achievement Point 1</Label>
-                    <Textarea
-                      id="achievementPoint1"
-                      value={formData.achievementPoint1}
-                      onChange={(e) => handleInputChange('achievementPoint1', e.target.value)}
-                      placeholder="Led a team of 20 members in organizing tech events..."
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="achievementPoint2">Achievement Point 2</Label>
-                    <Textarea
-                      id="achievementPoint2"
-                      value={formData.achievementPoint2}
-                      onChange={(e) => handleInputChange('achievementPoint2', e.target.value)}
-                      placeholder="Increased membership by 150% during tenure..."
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="achievementPoint3">Achievement Point 3</Label>
-                    <Textarea
-                      id="achievementPoint3"
-                      value={formData.achievementPoint3}
-                      onChange={(e) => handleInputChange('achievementPoint3', e.target.value)}
-                      placeholder="Secured $10,000 in sponsorships for annual tech conference..."
-                      rows={2}
-                    />
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
