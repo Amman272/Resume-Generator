@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Eye, RotateCcw, Download, FileText, Mail, GraduationCap, Briefcase, FolderOpen, Code, Award } from 'lucide-react';
+import { ArrowLeft, Eye, RotateCcw, Download, FileText, Mail, GraduationCap, Briefcase, FolderOpen, Code, Award, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,23 +21,25 @@ const ResumeBuilder = () => {
     degree: '',
     educationLocation: '',
     
-    // Experience (8 fields)
-    companyName: '',
-    experienceLocation: '',
-    role: '',
-    startDate: '',
-    endDate: '',
-    experiencePoint1: '',
-    experiencePoint2: '',
-    experiencePoint3: '',
+    // Experience (dynamic array)
+    experiences: [{
+      id: Date.now(),
+      companyName: '',
+      experienceLocation: '',
+      role: '',
+      startDate: '',
+      endDate: '',
+      experiencePoints: ['', '', '']
+    }],
     
-    // Projects (6 fields)
-    projectName: '',
-    technologies: '',
-    projectDate: '',
-    projectPoint1: '',
-    projectPoint2: '',
-    projectPoint3: '',
+    // Projects (dynamic array)
+    projects: [{
+      id: Date.now() + 1,
+      projectName: '',
+      technologies: '',
+      projectDate: '',
+      projectPoints: ['', '', '']
+    }],
     
     // Technical Skills (3 fields)
     languages: '',
@@ -59,6 +61,98 @@ const ResumeBuilder = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const updateExperience = (expId, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      experiences: prev.experiences.map(exp =>
+        exp.id === expId ? { ...exp, [field]: value } : exp
+      )
+    }));
+  };
+
+  const updateExperiencePoint = (expId, pointIndex, value) => {
+    setFormData(prev => ({
+      ...prev,
+      experiences: prev.experiences.map(exp =>
+        exp.id === expId ? {
+          ...exp,
+          experiencePoints: exp.experiencePoints.map((point, idx) =>
+            idx === pointIndex ? value : point
+          )
+        } : exp
+      )
+    }));
+  };
+
+  const addExperience = () => {
+    setFormData(prev => ({
+      ...prev,
+      experiences: [...prev.experiences, {
+        id: Date.now(),
+        companyName: '',
+        experienceLocation: '',
+        role: '',
+        startDate: '',
+        endDate: '',
+        experiencePoints: ['', '', '']
+      }]
+    }));
+  };
+
+  const removeExperience = (expId) => {
+    if (formData.experiences.length > 1) {
+      setFormData(prev => ({
+        ...prev,
+        experiences: prev.experiences.filter(exp => exp.id !== expId)
+      }));
+    }
+  };
+
+  const updateProject = (projId, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      projects: prev.projects.map(proj =>
+        proj.id === projId ? { ...proj, [field]: value } : proj
+      )
+    }));
+  };
+
+  const updateProjectPoint = (projId, pointIndex, value) => {
+    setFormData(prev => ({
+      ...prev,
+      projects: prev.projects.map(proj =>
+        proj.id === projId ? {
+          ...proj,
+          projectPoints: proj.projectPoints.map((point, idx) =>
+            idx === pointIndex ? value : point
+          )
+        } : proj
+      )
+    }));
+  };
+
+  const addProject = () => {
+    setFormData(prev => ({
+      ...prev,
+      projects: [...prev.projects, {
+        id: Date.now(),
+        projectName: '',
+        technologies: '',
+        projectDate: '',
+        projectPoints: ['', '', '']
+      }]
+    }));
+  };
+
+  const removeProject = (projId) => {
+    if (formData.projects.length > 1) {
+      setFormData(prev => ({
+        ...prev,
+        projects: prev.projects.filter(proj => proj.id !== projId)
+      }));
+    }
+  };
+
   const resetForm = () => {
     setFormData({
       NAME: '',
@@ -70,20 +164,22 @@ const ResumeBuilder = () => {
       dates: '',
       degree: '',
       educationLocation: '',
-      companyName: '',
-      experienceLocation: '',
-      role: '',
-      startDate: '',
-      endDate: '',
-      experiencePoint1: '',
-      experiencePoint2: '',
-      experiencePoint3: '',
-      projectName: '',
-      technologies: '',
-      projectDate: '',
-      projectPoint1: '',
-      projectPoint2: '',
-      projectPoint3: '',
+      experiences: [{
+        id: Date.now(),
+        companyName: '',
+        experienceLocation: '',
+        role: '',
+        startDate: '',
+        endDate: '',
+        experiencePoints: ['', '', '']
+      }],
+      projects: [{
+        id: Date.now() + 1,
+        projectName: '',
+        technologies: '',
+        projectDate: '',
+        projectPoints: ['', '', '']
+      }],
       languages: '',
       developerTools: '',
       technologiesFrameworks: '',
@@ -261,167 +357,200 @@ const ResumeBuilder = () => {
 
             {/* Experience */}
             <div className="card p-6">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
-                  <Briefcase className="h-5 w-5 text-primary-foreground" />
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                    <Briefcase className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <h2 className="text-xl font-semibold text-card-foreground">Experience</h2>
                 </div>
-                <h2 className="text-xl font-semibold text-card-foreground">Experience</h2>
+                <Button 
+                  onClick={addExperience}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span>Add Experience</span>
+                </Button>
               </div>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="companyName">Company Name</Label>
-                    <Input
-                      id="companyName"
-                      value={formData.companyName}
-                      onChange={(e) => handleInputChange('companyName', e.target.value)}
-                      placeholder="Tech Company Inc."
-                    />
+              
+              <div className="space-y-6">
+                {formData.experiences.map((experience, index) => (
+                  <div key={experience.id} className="border border-border rounded-lg p-4 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-medium text-foreground">Experience {index + 1}</h3>
+                      {formData.experiences.length > 1 && (
+                        <Button
+                          onClick={() => removeExperience(experience.id)}
+                          variant="ghost"
+                          size="sm"
+                          className="text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor={`companyName-${experience.id}`}>Company Name</Label>
+                        <Input
+                          id={`companyName-${experience.id}`}
+                          value={experience.companyName}
+                          onChange={(e) => updateExperience(experience.id, 'companyName', e.target.value)}
+                          placeholder="Tech Company Inc."
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor={`experienceLocation-${experience.id}`}>Location</Label>
+                        <Input
+                          id={`experienceLocation-${experience.id}`}
+                          value={experience.experienceLocation}
+                          onChange={(e) => updateExperience(experience.id, 'experienceLocation', e.target.value)}
+                          placeholder="San Francisco, CA"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor={`role-${experience.id}`}>Role</Label>
+                      <Input
+                        id={`role-${experience.id}`}
+                        value={experience.role}
+                        onChange={(e) => updateExperience(experience.id, 'role', e.target.value)}
+                        placeholder="Software Engineer"
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor={`startDate-${experience.id}`}>Start Date</Label>
+                        <Input
+                          id={`startDate-${experience.id}`}
+                          value={experience.startDate}
+                          onChange={(e) => updateExperience(experience.id, 'startDate', e.target.value)}
+                          placeholder="January 2022"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor={`endDate-${experience.id}`}>End Date</Label>
+                        <Input
+                          id={`endDate-${experience.id}`}
+                          value={experience.endDate}
+                          onChange={(e) => updateExperience(experience.id, 'endDate', e.target.value)}
+                          placeholder="Present"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {experience.experiencePoints.map((point, pointIndex) => (
+                        <div key={pointIndex}>
+                          <Label htmlFor={`experiencePoint${pointIndex}-${experience.id}`}>
+                            Experience Point {pointIndex + 1}
+                          </Label>
+                          <Textarea
+                            id={`experiencePoint${pointIndex}-${experience.id}`}
+                            value={point}
+                            onChange={(e) => updateExperiencePoint(experience.id, pointIndex, e.target.value)}
+                            placeholder={`Experience point ${pointIndex + 1}...`}
+                            rows={2}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <Label htmlFor="experienceLocation">Location</Label>
-                    <Input
-                      id="experienceLocation"
-                      value={formData.experienceLocation}
-                      onChange={(e) => handleInputChange('experienceLocation', e.target.value)}
-                      placeholder="San Francisco, CA"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor="role">Role</Label>
-                  <Input
-                    id="role"
-                    value={formData.role}
-                    onChange={(e) => handleInputChange('role', e.target.value)}
-                    placeholder="Software Engineer"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="startDate">Start Date</Label>
-                    <Input
-                      id="startDate"
-                      value={formData.startDate}
-                      onChange={(e) => handleInputChange('startDate', e.target.value)}
-                      placeholder="January 2022"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="endDate">End Date</Label>
-                    <Input
-                      id="endDate"
-                      value={formData.endDate}
-                      onChange={(e) => handleInputChange('endDate', e.target.value)}
-                      placeholder="Present"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <Label htmlFor="experiencePoint1">Experience Point 1</Label>
-                    <Textarea
-                      id="experiencePoint1"
-                      value={formData.experiencePoint1}
-                      onChange={(e) => handleInputChange('experiencePoint1', e.target.value)}
-                      placeholder="Developed and maintained web applications..."
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="experiencePoint2">Experience Point 2</Label>
-                    <Textarea
-                      id="experiencePoint2"
-                      value={formData.experiencePoint2}
-                      onChange={(e) => handleInputChange('experiencePoint2', e.target.value)}
-                      placeholder="Collaborated with cross-functional teams..."
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="experiencePoint3">Experience Point 3</Label>
-                    <Textarea
-                      id="experiencePoint3"
-                      value={formData.experiencePoint3}
-                      onChange={(e) => handleInputChange('experiencePoint3', e.target.value)}
-                      placeholder="Improved system performance by..."
-                      rows={2}
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Projects */}
             <div className="card p-6">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
-                  <FolderOpen className="h-5 w-5 text-primary-foreground" />
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                    <FolderOpen className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <h2 className="text-xl font-semibold text-card-foreground">Projects</h2>
                 </div>
-                <h2 className="text-xl font-semibold text-card-foreground">Projects</h2>
+                <Button 
+                  onClick={addProject}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span>Add Project</span>
+                </Button>
               </div>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="projectName">Project Name</Label>
-                    <Input
-                      id="projectName"
-                      value={formData.projectName}
-                      onChange={(e) => handleInputChange('projectName', e.target.value)}
-                      placeholder="E-commerce Platform"
-                    />
+              
+              <div className="space-y-6">
+                {formData.projects.map((project, index) => (
+                  <div key={project.id} className="border border-border rounded-lg p-4 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-medium text-foreground">Project {index + 1}</h3>
+                      {formData.projects.length > 1 && (
+                        <Button
+                          onClick={() => removeProject(project.id)}
+                          variant="ghost"
+                          size="sm"
+                          className="text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor={`projectName-${project.id}`}>Project Name</Label>
+                        <Input
+                          id={`projectName-${project.id}`}
+                          value={project.projectName}
+                          onChange={(e) => updateProject(project.id, 'projectName', e.target.value)}
+                          placeholder="E-commerce Platform"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor={`projectDate-${project.id}`}>Project Date</Label>
+                        <Input
+                          id={`projectDate-${project.id}`}
+                          value={project.projectDate}
+                          onChange={(e) => updateProject(project.id, 'projectDate', e.target.value)}
+                          placeholder="March 2023"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor={`technologies-${project.id}`}>Technologies</Label>
+                      <Input
+                        id={`technologies-${project.id}`}
+                        value={project.technologies}
+                        onChange={(e) => updateProject(project.id, 'technologies', e.target.value)}
+                        placeholder="React, Node.js, MongoDB"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {project.projectPoints.map((point, pointIndex) => (
+                        <div key={pointIndex}>
+                          <Label htmlFor={`projectPoint${pointIndex}-${project.id}`}>
+                            Project Point {pointIndex + 1}
+                          </Label>
+                          <Textarea
+                            id={`projectPoint${pointIndex}-${project.id}`}
+                            value={point}
+                            onChange={(e) => updateProjectPoint(project.id, pointIndex, e.target.value)}
+                            placeholder={`Project point ${pointIndex + 1}...`}
+                            rows={2}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <Label htmlFor="projectDate">Project Date</Label>
-                    <Input
-                      id="projectDate"
-                      value={formData.projectDate}
-                      onChange={(e) => handleInputChange('projectDate', e.target.value)}
-                      placeholder="March 2023"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor="technologies">Technologies</Label>
-                  <Input
-                    id="technologies"
-                    value={formData.technologies}
-                    onChange={(e) => handleInputChange('technologies', e.target.value)}
-                    placeholder="React, Node.js, MongoDB"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <Label htmlFor="projectPoint1">Project Point 1</Label>
-                    <Textarea
-                      id="projectPoint1"
-                      value={formData.projectPoint1}
-                      onChange={(e) => handleInputChange('projectPoint1', e.target.value)}
-                      placeholder="Built a full-stack e-commerce platform..."
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="projectPoint2">Project Point 2</Label>
-                    <Textarea
-                      id="projectPoint2"
-                      value={formData.projectPoint2}
-                      onChange={(e) => handleInputChange('projectPoint2', e.target.value)}
-                      placeholder="Implemented secure payment processing..."
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="projectPoint3">Project Point 3</Label>
-                    <Textarea
-                      id="projectPoint3"
-                      value={formData.projectPoint3}
-                      onChange={(e) => handleInputChange('projectPoint3', e.target.value)}
-                      placeholder="Optimized database queries for better performance..."
-                      rows={2}
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
