@@ -1,13 +1,8 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-interface EducationFormProps {
-  data: any;
-  updateData: (section: string, data: any) => void;
-}
-
-const EducationForm = ({ data, updateData }: EducationFormProps) => {
-  const handleChange = (field: string, value: string) => {
+const EducationForm = ({ data, updateData }) => {
+  const handleChange = (field, value) => {
     updateData('education', { [field]: value });
   };
 

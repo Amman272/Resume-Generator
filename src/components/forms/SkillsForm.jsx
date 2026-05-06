@@ -1,13 +1,8 @@
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-interface SkillsFormProps {
-  data: any;
-  updateData: (section: string, data: any) => void;
-}
-
-const SkillsForm = ({ data, updateData }: SkillsFormProps) => {
-  const handleChange = (field: string, value: string) => {
+const SkillsForm = ({ data, updateData }) => {
+  const handleChange = (field, value) => {
     updateData('skills', { [field]: value });
   };
 

@@ -2,13 +2,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-interface ExperienceFormProps {
-  data: any;
-  updateData: (section: string, data: any) => void;
-}
-
-const ExperienceForm = ({ data, updateData }: ExperienceFormProps) => {
-  const handleChange = (field: string, value: string) => {
+const ExperienceForm = ({ data, updateData }) => {
+  const handleChange = (field, value) => {
     updateData('experience', { [field]: value });
   };
 

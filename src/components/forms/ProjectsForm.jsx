@@ -2,13 +2,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-interface ProjectsFormProps {
-  data: any;
-  updateData: (section: string, data: any) => void;
-}
-
-const ProjectsForm = ({ data, updateData }: ProjectsFormProps) => {
-  const handleChange = (field: string, value: string) => {
+const ProjectsForm = ({ data, updateData }) => {
+  const handleChange = (field, value) => {
     updateData('projects', { [field]: value });
   };
 

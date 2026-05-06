@@ -2,13 +2,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-interface AchievementsFormProps {
-  data: any;
-  updateData: (section: string, data: any) => void;
-}
-
-const AchievementsForm = ({ data, updateData }: AchievementsFormProps) => {
-  const handleChange = (field: string, value: string) => {
+const AchievementsForm = ({ data, updateData }) => {
+  const handleChange = (field, value) => {
     updateData('achievements', { [field]: value });
   };
 
