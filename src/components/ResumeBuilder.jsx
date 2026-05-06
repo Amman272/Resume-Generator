@@ -252,6 +252,7 @@ const ResumeBuilder = () => {
   }
 async function sendBack(){
     setIsLoading(true);
+    
     setError(null);
     try{
 const response= await axios.post(" http://localhost:3000/form",{
@@ -263,16 +264,23 @@ const response= await axios.post(" http://localhost:3000/form",{
 const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
   // 3. Create a temporary URL and trigger the download
       const url = window.URL.createObjectURL(pdfBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'resume.pdf'); // Set the download filename
-      document.body.appendChild(link);
-      link.click();
-
+      //download
+      // const link = document.createElement('a');
+      // link.href = url;
+      // link.setAttribute('download', 'resume.pdf'); // Set the download filename
+      // document.body.appendChild(link);
+      // link.click();
+// new tab
+window.open(url,'_blank');
+setTimeout(()=>window.URL.revokeObjectURL(url),100)
 }
 catch(error){
-  console.log(error)
+   console.error("Error generating resume:", err);
+      setError('Failed to generate resume. Please ensure the backend server is running.');
 
+}
+finally{
+  setIsLoading(false);
 }
 console.log("send to backend")
 }
@@ -300,17 +308,17 @@ console.log("send to backend")
                 <RotateCcw className="h-4 w-4" />
                 <span>Reset</span>
               </Button>
-              <Button variant="outline" className="flex items-center space-x-2">
+              {/* <Button variant="outline" className="flex items-center space-x-2">
                 <Eye className="h-4 w-4" />
                 
-                <span onClick={sendBack}>send to backend </span>
-              </Button>
+               <span onClick={sendBack}>send to backend </span>
+              </Button> */}
               <Button variant="outline" className="flex items-center space-x-2">
                 <Eye className="h-4 w-4" />
                 
                 <span onClick={showData}>Preview</span>
               </Button>
-              <Button onClick={generateResume} className="flex items-center space-x-2">
+              <Button onClick={sendBack} className="flex items-center space-x-2">
                 <Download className="h-4 w-4" />
                 <span>Generate PDF</span>
               </Button>

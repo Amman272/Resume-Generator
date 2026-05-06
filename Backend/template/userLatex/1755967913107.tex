@@ -1,0 +1,205 @@
+\documentclass[letterpaper,11pt]{article}
+
+%--- PACKAGES ---
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+% \input{glyphtounicode}
+% \pdfgentounicode=1
+
+%--- LAYOUT & MARGINS ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+
+%--- CUSTOM COMMANDS ---
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+
+%======================================================================
+%                           DOCUMENT START
+%======================================================================
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+    {\Huge \scshape Aarav Sharma } \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ +91 98765 43210 ~
+    \href{mailto:aarav.sharma.dev@example.com }{\raisebox{-0.2\height}\faEnvelope\  \underline{ aarav.sharma.dev@example.com }} ~
+    \href{https://linkedin.com/in/aaravsharmadev }{\raisebox{-0.2\height}\faLinkedin\ \underline{ linkedin.com/in/aaravsharmadev }}  ~
+    \href{https://github.com/aaravsharma }{\raisebox{-0.2\height}\faGithub\ \underline{ github.com/aaravsharma }}
+    \vspace{-8pt}
+\end{center}
+%----------- EDUCATION -----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    { Indian Institute of Technology, Bombay }{ Aug 2020 – May 2024 }
+    { B.Tech in Computer Science and Engineering }{ Mumbai, India }
+\resumeSubHeadingListEnd
+
+%----------- EXPERIENCE -----------
+\section{Experience}
+\resumeSubHeadingListStart
+  % --- Experience 1 ---
+  \resumeSubheading
+    { InnovateTech Solutions }{ May 2023 -- July 2023 }
+    { Software Development Engineer Intern }{ Bangalore, India }
+    \resumeItemListStart
+      \resumeItem{ Developed a scalable microservice for real-time data processing using Go and Kafka, improving system throughput by 40\%. }
+      \resumeItem{ Engineered and integrated a new RESTful API endpoint for the main application, serving over 100,000 daily requests. }
+      \resumeItem{ Wrote comprehensive unit and integration tests, increasing code coverage of the module from 75\% to 92\%. }
+    \resumeItemListEnd
+
+  % --- Experience 2 ---
+  %START-E2
+  \resumeSubheading
+    { DataLeap Analytics }{ Dec 2022 -- Jan 2023 }
+    { Machine Learning Intern }{ Remote }
+    \resumeItemListStart
+      \resumeItem{ Implemented and fine-tuned a sentiment analysis model using Python, Scikit-learn, and NLTK, achieving 88\% accuracy on customer feedback data. }
+      \resumeItem{ Designed a data visualization dashboard with Tableau to present model performance metrics to non-technical stakeholders. }
+      \resumeItem{ Collaborated on a data pipeline that cleaned and pre-processed over 1GB of raw text data for model training. }
+    \resumeItemListEnd
+  %END-E2
+    
+  % --- Experience 3 ---
+  %START-E3
+  \resumeSubheading
+    { FinSecure Payments }{ May 2022 -- July 2022 }
+    { Backend Developer Intern }{ Hyderabad, India }
+    \resumeItemListStart
+      \resumeItem{ Contributed to a high-availability payment gateway system built on Java and Spring Boot, focusing on transaction security. }
+      \resumeItem{ Optimized database queries in PostgreSQL, reducing average transaction processing time by 150ms. }
+      \resumeItem{ Participated in Agile sprints, daily stand-ups, and code reviews, utilizing Git and JIRA for version control and project management. }
+    \resumeItemListEnd
+  %END-E3
+\resumeSubHeadingListEnd
+\vspace{-16pt}
+
+%----------- PROJECTS -----------
+\section{Projects}
+\vspace{-5pt}
+\resumeSubHeadingListStart
+  % --- Project 1 ---
+  \resumeProjectHeading
+    {\textbf{ Intelligent Resume Parser } $|$ \emph{ Python, spaCy, FastAPI, Docker }}{ 2024 }
+    \resumeItemListStart
+      \resumeItem{ Built a web application that extracts key information (skills, experience, education) from PDF resumes using Natural Language Processing. }
+      \resumeItem{ Developed a REST API with FastAPI to serve the parsing model and deployed the application as a containerized service using Docker. }
+      \resumeItem{ Achieved an average of 90\% accuracy in entity recognition across a diverse set of resume templates. }
+    \resumeItemListEnd
+    \vspace{-13pt}
+
+  % --- Project 2 ---
+  %START-PROJECT-2
+  \resumeProjectHeading
+    {\textbf{ Decentralized Voting System } $|$ \emph{ Solidity, Ethereum, Hardhat, React.js }}{ 2023 }
+    \resumeItemListStart
+      \resumeItem{ Designed and implemented a secure, transparent, and tamper-proof voting application using smart contracts on the Ethereum blockchain. }
+      \resumeItem{ Created a user-friendly frontend with React.js to interact with the smart contract, allowing for voter registration and ballot casting. }
+      \resumeItem{ Wrote extensive tests for the smart contract using Hardhat to ensure security and functionality before deployment on a testnet. }
+    \resumeItemListEnd
+    \vspace{-13pt}
+  %END-PROJECT-2
+
+  % --- Project 3 ---
+  %START-PROJECT-3
+  \resumeProjectHeading
+    {\textbf{ Campus Navigation App } $|$ \emph{ Flutter, Dart, Firebase, Google Maps API }}{ 2022 }
+    \resumeItemListStart
+      \resumeItem{ Developed a cross-platform mobile application for indoor and outdoor navigation within the IIT Bombay campus. }
+      \resumeItem{ Integrated Google Maps API for outdoor routing and used Firebase Firestore for storing building and classroom location data in real-time. }
+      \resumeItem{ Implemented a feature to find the shortest accessible path for students with disabilities. }
+    \resumeItemListEnd
+  %END-PROJECT-3
+\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%----------- TECHNICAL SKILLS -----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{Languages}{: Python, C++, Java, Go, JavaScript, SQL } \\
+    \textbf{Developer Tools}{: Git, Docker, Kubernetes, Jenkins, Postman, JIRA } \\
+    \textbf{Technologies/Frameworks}{: React, Node.js, Spring Boot, Kafka, TensorFlow, PyTorch, PostgreSQL, MongoDB, AWS, GCP } \\
+  }}
+\end{itemize}
+\vspace{-16pt}
+
+%----------- ACHIEVEMENTS -----------
+\section{Achievements}
+\resumeSubHeadingListStart
+  % --- Achievement 1 ---
+  \resumeSubheading
+    { Smart India Hackathon 2023 }{ Oct 2023 -- Oct 2023 }
+    { Team Leader }{ National Level (Virtual) }
+    \resumeItemListStart
+      \resumeItem{ Led a team of 6 to win the top prize for developing an AI-powered platform to detect and curb the spread of misinformation online. }
+    \resumeItemListEnd
+
+  % --- Achievement 2 ---
+  %START-A2
+  \resumeSubheading
+    { Codeforces }{ 2021 -- Present }
+    { Competitive Programmer }{ Online }
+    \resumeItemListStart
+      \resumeItem{ Achieved a &quot;Candidate Master&quot; rating (1950+), consistently ranking in the top 10\% of global participants in programming contests. }
+    \resumeItemListEnd
+  %END-A2
+    
+  % --- Achievement 3 ---
+  %START-A3
+  \resumeSubheading
+    { IIT Bombay Techfest }{ 2022 -- 2023 }
+    { Core Team, Web  App }{ Mumbai, India }
+    \resumeItemListStart
+      \resumeItem{ Co-developed the official Techfest mobile app, which was downloaded over 50,000 times and handled peak traffic of 5,000 concurrent users. }
+    \resumeItemListEnd
+  %END-A3
+\resumeSubHeadingListEnd
+
+\end{document}
