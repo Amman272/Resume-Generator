@@ -152,6 +152,29 @@ function PDFsend(name,res){
   })
 
 }
+function PDFsendPreview(name,res){
+    const userLatexDir = path.join(__dirname, "template", "userLatex");
+    const texFilePath = path.join(userLatexDir, `${name}.tex`);
+    const pdfFilePath = path.join(userLatexDir, `${name}.pdf`);
+  res.sendFile(pdfFilePath,(err)=>{
+    if(err){
+      res.status(500).send('Error sending PDF file.');
+          console.log(err);
+    }
+
+  else{
+    console.log("pdf sent sucessfullly");
+      //  fs.unlink(pdfFilePath, () => {}); // Delete PDF
+      //        fs.unlink(path.join(__dirname, "template", "userLatex", `${name}.tex`), () => {});// deletes tex file
+   
+  }
+  })
+
+}
+
+
+
+
 router.post("/", async (req, res) => {
   const data = req.body.formData;
 const name = userLatex();
@@ -168,6 +191,27 @@ const name = userLatex();
     insertData(name, data);
    const pdfPath= await expPDF(name);
    PDFsend(name,res);
+
+  } catch (error) {
+    console.log(error);
+  }
+});
+router.post("/preview", async (req, res) => {
+  const data = req.body.formData;
+const name = userLatex();
+
+  for (const key in data) {
+    data[key] = escapeLatex(data[key]);
+  }
+
+  //res.status(200).json({ message: "sent" });
+
+  try {
+    
+    editLatex(name, data);
+    insertData(name, data);
+   const pdfPath= await expPDF(name);
+   PDFsendPreview(name,res);
 
   } catch (error) {
     console.log(error);
