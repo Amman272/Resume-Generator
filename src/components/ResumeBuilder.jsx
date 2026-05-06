@@ -9,6 +9,7 @@ import { Result } from 'postcss';
 import axios from 'axios';
 
 const ResumeBuilder = () => {
+  console.log('ResumeBuilder component loading...');
   const [formData, setFormData] = useState({
     // Contact (5 fields)
     NAME: '',
@@ -237,6 +238,8 @@ const ResumeBuilder = () => {
 
   function showData(){
     console.log('Form Data:', formData);
+    console.log('Form Data Keys:', Object.keys(formData));
+    console.log('Visible Sections:', visibleSections);
   }
 async function sendBack(){
 const Result= await axios.post(" http://localhost:3000/form",{
